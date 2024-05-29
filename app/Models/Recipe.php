@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Recipe extends Model
 {
@@ -78,5 +79,24 @@ class Recipe extends Model
     public function avgMark()
     {
         return Mark::query()->where('recipe_id', $this->id)->avg('mark');
+    }
+
+    static function generateUniqueSlug($title)
+    {
+        $slug = Str::slug($title);
+
+        // Проверяем уникальность slug в базе данных
+        $count = Recipe::where('slug_title', $slug)->count();
+
+        // Если slug уже существует, добавляем к нему числовой суффикс
+        $uniqueSlug = $slug;
+        $suffix = 1;
+        while ($count > 0) {
+            $uniqueSlug = $slug . '-' . $suffix;
+            $count = Recipe::where('slug_title', $uniqueSlug)->count();
+            $suffix++;
+        }
+
+        return $uniqueSlug;
     }
 }

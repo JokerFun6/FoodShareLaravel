@@ -26,6 +26,7 @@ class RegisterForm extends Component
 
     public function register(){
         $data = $this->validate();
+        $data['avatar_url'] = User::generateAvatar($this->login);
         $user = User::query()->create($data);
         return $this->success('Ваш аккаунт успешно создан🎂!', redirectTo: 'login');
     }

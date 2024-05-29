@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\user\UserController;
 use App\Livewire\Welcome;
 use Illuminate\Support\Facades\Route;
 
@@ -29,14 +30,10 @@ Route::middleware('guest')->group(function (){
 
 Route::middleware('auth')->group(function (){
     Route::get('logout', [LoginController::class, 'destroy'])->name('login.destroy');
-    Route::get('users/profile', [UserController::class, 'index'])->name('users.index');
-    Route::post('users/profile/update', [UserController::class, 'update'])->name('users.update');
-    Route::post('recipes/{recipe}/comments/store', [CommentController::class, 'store'])->name('recipes.comments.store');
-    Route::get('recipes/{recipe}/comments/{comment}/destroy', [CommentController::class, 'destroy'])->name('recipes.comments.destroy');
-
+    Route::get('users/favorites', [UserController::class, 'favorites'])->name('users.favorites');
 });
 
-Route::get('users/profiles', [UserController::class, 'subscriber'])->name('users.subscriber');
+Route::get('users/profile/{id?}', [UserController::class, 'index'])->name('users.index');
 Route::get('recipes/random', [RecipeController::class, 'random'])->name('recipes.random');
 Route::get('recipes/topic', [RecipeController::class, 'topic'])->name('recipes.topic');
 Route::resource('recipes', RecipeController::class);

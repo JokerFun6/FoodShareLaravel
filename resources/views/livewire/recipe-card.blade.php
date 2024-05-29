@@ -1,13 +1,9 @@
-<div
-    x-data="{ open: false }"
-    class="card min-w-[305px] bg-green-500 shadow-xl image-full"
->
-    <figure><img src="{{ asset('storage/'. $recipe->photo_url) }}" alt="Shoes" /></figure>
-    <div class="card-body">
-        <div class="card-title justify-between">
-            <h2>{{ $recipe->title }}</h2>
-            <a
-                href="#"
+<div x-data="{ open: false }" class="relative h-[250px] overflow-hidden rounded-lg shadow-lg hover:scale-110 transition ease-in-out delay-150 duration-300">
+    <img src="{{ asset('storage/'. $recipe->photo_url) }}" alt="Recipe" class="absolute inset-0 object-cover w-full h-full opacity-70">
+    <div href="{{ route('recipes.show', $recipe) }}" class="relative flex flex-col justify-between h-full p-6 bg-black bg-opacity-50">
+        <div class="flex justify-between items-center">
+            <h2 class="text-xl font-bold text-white">{{ $recipe->title }}</h2>
+            <button
                 class="rounded-full p-2 border border-error"
                 wire:click.throttling.1000ms.debounce.0ms.="toggle()"
             >
@@ -29,10 +25,10 @@
                         d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
                     />
                 </svg>
-            </a>
+            </button>
         </div>
-        <p>{{ Str::limit($recipe->description, 30, '...') }}</p>
-        <div class="card-actions justify-end">
+        <p class="text-white">{{ Str::limit($recipe->description, 45, '...') }}</p>
+        <div class="mt-4 flex justify-end space-x-2">
             <button
                 @click="open = !open"
                 class="btn btn-accent btn-sm"
@@ -40,15 +36,14 @@
                 Ингредиенты
             </button>
             <div
+                x-cloak
                 x-show="open"
                 x-transition.debounce.750ms
                 @click.away="open = false"
-                class="absolute left-0 top-0 z-100 w-full mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+                class="absolute left-0 top-0 z-10 w-[95%] mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
             >
                 <div class="p-4">
-                    <p class="text-sm text-gray-700 pb-1 border-b">
-                        Ингредиенты
-                    </p>
+                    <p class="text-sm text-gray-700 pb-1 border-b">Ингредиенты</p>
                     <p class="text-sm text-gray-700">
                         @foreach($recipe->ingredients as $ingredient)
                             {{ $ingredient->title }},
@@ -84,3 +79,4 @@
         </div>
     </div>
 </div>
+

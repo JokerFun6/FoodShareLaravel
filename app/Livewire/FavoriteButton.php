@@ -16,7 +16,7 @@ class FavoriteButton extends Component
             $user = auth()->user();
             if($user->favorites->contains($this->recipe)){
                 $user->favorites()->detach($this->recipe);
-                return $this->success('Рецепт успешно удален из избранного');
+                return $this->success('Рецепт удален из избранного');
             }
             else{
                 $user->favorites()->attach($this->recipe);

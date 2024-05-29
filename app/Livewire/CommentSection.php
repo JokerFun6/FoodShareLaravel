@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Comment;
 use App\Models\Recipe;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -47,6 +48,9 @@ class CommentSection extends Component
     public function removeComment(Comment $comment): void
     {
         if($comment->user->login === auth()->user()->login){
+            if ($comment->photo_url) {
+                Storage::delete('public/' . $comment->photo_url);
+            }
             $comment->delete();
             $this->success('Ваш комментарий успешно удален');
         }
@@ -63,7 +67,7 @@ class CommentSection extends Component
     public function render()
     {
         return view('livewire.comment-section', [
-            'comments'=>$this->recipe->comments
+            'comments'=>$this->recipe->comments->sortDesc()
         ]);
     }
 }

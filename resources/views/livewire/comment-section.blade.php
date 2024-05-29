@@ -1,10 +1,10 @@
 <section
-    class="bg-base-200 rounded-lg shadow-lg mt-4 py-8 lg:py-16 antialiased"
+    class="rounded-lg shadow-lg mt-4 py-8 lg:py-16 antialiased"
 >
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between items-center mb-6">
             <h2
-                class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white"
+                class="text-lg lg:text-2xl text-black font-bold"
             >
                 Комментарии ({{ $recipe->comments()->count() }})
             </h2>
@@ -13,13 +13,13 @@
         <form class="mb-6" wire:submit.prevent="addComment">
 
             <div
-                class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+                class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200"
             >
                 <label for="comment" class="sr-only">Твой комментарий</label>
                 <textarea
                     id="comment"
                     rows="6"
-                    class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                    class="px-0 w-full text-sm border-0 focus:ring-0 focus:outline-none"
                     placeholder="Оставьте комментарий"
                     required
                     wire:model="text"
@@ -72,18 +72,19 @@
             <div class="text-center text-info mb-7 text-xl">Войдите в систему, чтобы оставить комментарий</div>
         @endauth
         @forelse($comments as $comment)
-            <article wire:key="{{ $comment->id }}" class="p-6 text-base mb-5 bg-white rounded-lg dark:bg-gray-900">
+            <article wire:key="{{ $comment->id }}" class="p-6 text-base mb-5 bg-white rounded-lg shadow-xl">
             <footer class="flex justify-between items-center mb-2">
                 <div class="flex items-center flex-wrap">
-                    <p
-                        class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"
+                    <a
+                        class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold"
+                        href="{{ route('users.index', $comment->user->id) }}"
                     >
                         <img
                             class="mr-2 w-6 h-6 rounded-full"
                             src="{{ asset('storage/' . $comment->user->avatar_url) }}"
                             alt="{{ $comment->user->login }}"
                         />{{ $comment->user->login }}
-                    </p>
+                    </a>
                     <p class="text-sm text-gray-600 dark:text-gray-400 mr-2">
                         <time pubdate datetime="{{ $comment->created_at }}" title="February 8th, 2022"
                         >{{ $comment->created_at->diffForHumans() }}</time

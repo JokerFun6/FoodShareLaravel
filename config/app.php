@@ -16,7 +16,8 @@ return [
     */
 
     'name' => env('APP_NAME', 'FoodShare'),
-
+    'api_key' => env('API_KEY'),
+    'api_secret_key' => env('API_SECRET_KEY'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -194,6 +195,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],

@@ -18,6 +18,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('recipes.topic');
+        return redirect()->intended('/recipes');
     }
 }

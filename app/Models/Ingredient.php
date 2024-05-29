@@ -10,6 +10,16 @@ class Ingredient extends Model
 {
     use HasFactory;
 
+    public static array $measures = [
+        ['value' => 'кг'],
+        ['value' => 'мл'],
+        ['value' => 'шт'],
+        ['value' => 'л'],
+        ['value' => 'гр'],
+        ['value' => 'ст.л'],
+        ['value' => 'ч.л']
+    ];
+
     public $table = 'ingredients';
     public $timestamps = false;
     protected $fillable = [
