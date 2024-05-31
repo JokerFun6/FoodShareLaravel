@@ -14,7 +14,17 @@
 
 @section('content')
     <main class="mx-auto max-w-[1440px] mt-4 p-3">
-
+        <header class="mb-8 p-6 bg-primary text-white rounded-lg shadow-lg">
+            <div class="flex flex-wrap items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <img src="{{ asset('assets/images/logo-small.png') }}" alt="Site Logo" class="h-16 w-16 object-cover rounded-full">
+                    <h1 class="text-3xl font-bold">FoodShare</h1>
+                </div>
+                <!-- Info -->
+                <p class="max-w-lg text-lg">Добро пожаловать на наш сайт, где вы найдете множество вкусных и разнообразных рецептов! Исследуйте популярные и последние опубликованные рецепты ниже.</p>
+            </div>
+        </header>
         <div class="swiper">
             <h2 class="text-2xl text-neutral-content mb-3">Популярные рецепты</h2>
             <!-- Additional required wrapper -->

@@ -37,6 +37,7 @@ class RecipeCreate extends Component
     public ?Recipe $recipe;
     public ingredientForm $ingredient_form;
     public stepForm $step_form;
+    public $is_edit = false;
     #[Url]
     public int $stage = 1;
 
@@ -68,12 +69,21 @@ class RecipeCreate extends Component
                 $this->steps_data[$index]['photo_url'] = $step->photo_url ? 'storage/' . $step->photo_url : '';
                 $this->stepFormIndex++;
             }
-
+            $this->is_edit = true;
         }
 
     }
     public function clearPhoto(){
         $this->recipe_form->reset('recipe_photo');
+    }
+
+    public function setStage($stage)
+    {
+        if ($this->is_edit) {
+            $this->stage = $stage;
+        }else{
+            return $this->info('Сначало заполните все данные');
+        }
     }
 
     public function save_recipe(){
@@ -131,6 +141,7 @@ class RecipeCreate extends Component
         $this->validate(['steps_data' => 'required|min:1'], ['required' => 'Добавьте хотя бы один шаг']);
         $this->success('Шаги успешно добавлены');
         $this->stage++;
+        $this->is_edit = true;
     }
     public function add_tag(){
         $data = $this->tag_add_form->validate();
@@ -141,7 +152,7 @@ class RecipeCreate extends Component
 //        $this->tag_add_form->reset('title');
     }
 
-    public function add_ingredient(){
+    public function add_new_ingredient(){
         $data = $this->ingredient_add_form->validate();
         $data['slug_title'] = Str::slug($this->ingredient_add_form->title);
         $data['calorie'] = 0;

@@ -1,10 +1,18 @@
 <div class="flex flex-col items-center justify-center mx-auto">
 
     <ul class="steps mx-auto mb-4 overflow-x-auto">
-        <li class="step step-primary"><span class="text-sm">Рецепт</span></li>
-        <li class="step @if($stage === 2 || $stage === 3 || $stage === 4)step-primary @endif"><span class="text-sm">Ингредиенты</span></li>
-        <li class="step @if($stage === 3 || $stage === 4)step-primary @endif"><span class="text-sm">Шаги</span></li>
-        <li class="step @if($stage === 4)step-primary @endif" data-content="✔"><span class="text-sm">Готово</span></li>
+        <li class="step @if($stage >= 1) step-primary @endif" wire:click="setStage(1)">
+            <span class="text-sm">Рецепт</span>
+        </li>
+        <li class="step @if($stage >= 2) step-primary @endif" wire:click="setStage(2)">
+            <span class="text-sm">Ингредиенты</span>
+        </li>
+        <li class="step @if($stage >= 3) step-primary @endif" wire:click="setStage(3)">
+            <span class="text-sm">Шаги</span>
+        </li>
+        <li class="step @if($stage >= 4) step-primary @endif" wire:click="setStage(4)" data-content="✔">
+            <span class="text-sm">Готово</span>
+        </li>
     </ul>
 
     @if($stage === 1)
@@ -188,13 +196,13 @@
                             option-label="title"
                             icon="o-beaker"
                             label="Выберите нужный ингредиент"
-                            class="input-primary rounded-r-none"
+                            class="input-primary"
                             searchable
                             single
                             no-result-text="Ингредиент отсутствует"
                         />
                     </div>
-                    <x-mary-icon @click="modalIngredient=true" name="o-plus-circle" class="h-[48px] p-1 bg-primary text-white cursor-pointer rounded-r-lg" />
+                    <x-mary-icon @click="modalIngredient=true" name="o-plus-circle" class="ml-1 h-[48px] p-1 bg-primary text-white cursor-pointer rounded-full" />
                     <div x-cloak x-show="modalIngredient"
                          class="fixed inset-0 flex items-center justify-center z-50">
                         <div class="bg-black bg-opacity-50 fixed inset-0 backdrop-blur-sm"></div>
@@ -203,17 +211,19 @@
                             <x-mary-input wire:model="ingredient_add_form.title" class="input-sm mb-2" label="Название" />
                             <div class="flex justify-end">
                                 <button @click="modalIngredient = false" class="btn btn-secondary btn-sm mr-3">Отмена</button>
-                                <button type="button" wire:click="add_ingredient" class="btn btn-accent btn-sm">
+                                <button type="button" wire:click="add_new_ingredient" class="btn btn-accent btn-sm">
                                     Сохранить
-                                    <span wire:target="add_tag" wire:loading class="hidden loading loading-spinner loading-sm"></span>
+                                    <span wire:target="add_new_ingredient" wire:loading class="hidden loading loading-spinner loading-sm"></span>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <x-mary-input wire:model="ingredient_form.value" type="number" class="input-sm" label="Количество">
-
+                <x-mary-input min="1" wire:model="ingredient_form.value" type="number" class="input-sm" label="Количество">
+                    <x-slot:append>
+                        <x-mary-select :options="\App\Models\Ingredient::$measures" wire:model="ingredient_form.measure" option-value="value" option-label="value" class="select-sm rounded-l-none bg-base-100" />
+                    </x-slot:append>
                 </x-mary-input>
                 <x-mary-input wire:model="ingredient_form.comment" class="input-sm mb-3" label="Примечание(необязательно)" />
             </div>
@@ -316,7 +326,7 @@
 
         <div class="flex flex-col justify-center min-h-[70vh] items-center mx-auto justify-self-center">
             <button wire:click="complete()" wire:loading.remove type="button" class="btn btn-primary btn-outline">Нажмите, чтобы сформировать рецепт</button>
-            <span wire:loading class="hidden loading loading-dots text-accent w-[180px] mx-auto"></span>
+            <span wire:loading wire:target="complete" class="hidden loading loading-dots text-accent w-[180px] mx-auto"></span>
             <h2 class="hidden text-lg" wire:loading>Идет загрузка</h2>
         </div>
 

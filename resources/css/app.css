@@ -20,3 +20,10 @@
     @apply bg-base-100
 }
 
+.swiper-pagination-bullet-active{
+    @apply bg-primary
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+    @apply text-primary;
+}

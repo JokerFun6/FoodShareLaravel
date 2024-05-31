@@ -36,91 +36,85 @@
                 <span class="hidden sm:inline">Фильтры</span>
             </x-mary-button>
 
-            <div
-                x-show="open"
-                x-cloak
-                @click.away="open = false"
-                class="fixed inset-y-0 left-0 z-50 w-80 overflow-y-auto bg-accent shadow-lg transform transition-all duration-300 ease-in-out"
-                :class="{ 'translate-x-0': open, '-translate-x-full': !open }"
-            >
-                <div class="p-6">
-                    <h2 class="text-xl font-bold mb-3 border-b-2 border-white">Фильтры</h2>
-                    <form action="" method="get">
-                        <label class="form-control w-full max-w-xs">
-                            <div class="label">Выберите сложность:</div>
-                            <select
-                                wire:model.live="level"
-                                class="select select-primary bg-base-100 select-sm w-full mb-3 active:ring-0 active:border-none max-w-xs"
-                                name="level"
-                            >
-                                <option value="" selected>
-                                    Выберите уровень
-                                </option>
-                                <option value="легкий">легкий</option>
-                                <option value="средний">средний</option>
-                                <option value="сложный">сложный</option>
-                            </select>
-                        </label>
-                        <div class="form-control flex justify-between mb-3">
+            <div x-cloak x-show="open" class="fixed inset-0 z-50 flex">
+                <!-- Overlay -->
+                <div @click="open = false" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
 
-                            <label class="w-full">Укажите диапазон цен</label>
-                            <x-mary-input
-                                type="number"
-                                label="Минимальная цена"
-                                wire:model.live.debounce.250ms="min_price"
-                                class="input-sm"
-                                suffix="руб."
+                <!-- Sidebar -->
+                <div class="relative w-80 overflow-y-auto bg-neutral shadow-lg transform transition-all duration-300 ease-in-out"
+                     :class="{ 'translate-x-0': open, '-translate-x-full': !open }">
+                    <div class="p-6">
+                        <!-- Close Button -->
+                        <button @click="open = false" class="absolute w-8 top-4 right-4 text-primary">
+                            &times;
+                        </button>
+                        <h2 class="text-xl font-bold mb-3 border-b-2 border-white">Фильтры</h2>
+                        <form action="" class="overflow-y-auto" method="get">
+                            <label class="block mb-4">
+                                <span class="label">Выберите сложность:</span>
+                                <select wire:model.live="level"
+                                        class="select select-primary bg-base-100 select-sm w-full active:ring-0 active:border-none">
+                                    <option value="" selected>Выберите уровень</option>
+                                    <option value="легкий">легкий</option>
+                                    <option value="средний">средний</option>
+                                    <option value="сложный">сложный</option>
+                                </select>
+                            </label>
+                            <div class="form-control mb-4">
+                                <label class="block mb-2">Укажите диапазон цен</label>
+                                <x-mary-input
+                                    type="number"
+                                    label="Минимальная цена"
+                                    wire:model.live.debounce.250ms="min_price"
+                                    class="input-sm"
+                                    suffix="руб."
                                 />
-                            <x-mary-input
-                                type="number"
-                                label="Максимальная цена"
-                                wire:model.live.debounce.250ms="max_price"
-                                class="input-sm"
-                                suffix="руб."
+                                <x-mary-input
+                                    type="number"
+                                    label="Максимальная цена"
+                                    wire:model.live.debounce.250ms="max_price"
+                                    class="input-sm"
+                                    suffix="руб."
+                                />
+                            </div>
+                            <hr class="my-4"/>
+                            @auth
+                                <label class="block mb-4">
+                                    <x-mary-checkbox class="checkbox-primary" label="Исключить нелюбимые продукты"
+                                                     wire:model.live="is_allergy"/>
+                                </label>
+                                <label class="block mb-4">
+                                    <x-mary-checkbox class="checkbox-primary" label="Включить избранное" wire:model.live="showFavorites"/>
+                                </label>
+                            @endauth
+                            <hr class="my-4"/>
+                            <x-mary-choices-offline
+                                wire:model.live="selectedTags"
+                                :options="$tags"
+                                option-label="title"
+                                label="Выберите желаемые категории"
+                                class="input-info mb-2"
+                                icon="o-hashtag"
+                                searchable
+                                no-result-text="ничего не нашли"
                             />
-                        </div>
-                        <hr class="my-3"/>
-                        @auth
-                            <label class="form-control w-full max-w-xs ">
-                                <x-mary-checkbox class="checkbox-primary" label="Исключить нелюбимые продукты" wire:model.live="is_allergy" />
-                            </label>
-
-                            <label class="form-control w-full max-w-xs ">
-                                <x-mary-checkbox class="checkbox-primary" label="Включить избранное" wire:model.live="showFavorites" />
-                            </label>
-                        @endauth
-
-                        <hr class="my-3"/>
-
-                        <x-mary-choices-offline
-                            wire:model.live="selectedTags"
-                            :options="$tags"
-                            option-label="title"
-                            label="Выберите желаемые категории"
-                            class="input-info mb-4"
-                            icon="o-hashtag"
-                            searchable
-                            no-result-text="ничего не нашли"
-                        />
-
-                        <hr class="my-3"/>
-
-                        <x-mary-choices-offline
-                            wire:model.live="selectedIngredients"
-                            :options="$ingredients"
-                            option-label="title"
-                            label="Выберите необходимые ингредиенты"
-                            class="input-info mb-4"
-                            icon="o-beaker"
-                            searchable
-                            no-result-text="ничего не нашли"
-                        />
-
-                        <button type="button" wire:click="resetProperties" class="btn btn-outline btn-error">Сбросить все</button>
-
-                        <span wire:loading.class.remove="hidden"
-                              class="hidden loading loading-spinner loading-lg mx-auto"></span>
-                    </form>
+                            <hr class="my-4"/>
+                            <x-mary-choices-offline
+                                wire:model.live="selectedIngredients"
+                                :options="$ingredients"
+                                option-label="title"
+                                label="Выберите необходимые ингредиенты"
+                                class="input-info mb-4"
+                                icon="o-beaker"
+                                searchable
+                                no-result-text="ничего не нашли"
+                            />
+                            <button type="button" wire:click="resetProperties"
+                                    class="btn btn-sm btn-outline btn-error w-full">Сбросить все</button>
+                            <span wire:loading.class.remove="hidden"
+                                  class="hidden loading loading-spinner loading-lg mx-auto mt-4"></span>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

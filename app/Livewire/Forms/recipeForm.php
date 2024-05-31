@@ -11,15 +11,12 @@ use Livewire\Form;
 class recipeForm extends Form
 {
     public Recipe $recipe;
-    #[Validate(
-        'nullable|image|dimensions:min_width=800,min_height=450',
-        as: 'Изображение',
-        message: [
-            'dimensions' => 'Изображение должно быть не меньше 800 * 450 px'],
-    )
-    ]
+    #[Validate('nullable', as: 'Фото')]
+    #[Validate('image', as: 'Фото', message: 'Прикрепляемый файл должен быть изображением')]
+    #[Validate('dimensions:min_width=800,min_height=450', as: 'Фото', message: 'Изображение должно быть не меньше 800 * 450 px')]
     #[Validate('max:1500', as: 'Фото', message: 'Размер изображения не должен превышать 1500 кб')]
     public $recipe_photo;
+
     #[Validate('required|string|max:255|min:5', as: 'Название')]
     public string $recipe_title;
     #[Validate('required|string|min:20', as: 'Описание')]

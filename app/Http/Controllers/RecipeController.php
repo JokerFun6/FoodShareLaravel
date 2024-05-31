@@ -24,9 +24,12 @@ class RecipeController extends Controller
     }
     public function topic()
     {
-        $latest = Recipe::query()->latest()->take(15)->get();
-        $popular = Recipe::query()->withCount('marks')->orderByDesc('marks_count')
-            ->take(15)->get();
+        $latest = Recipe::query()->where('is_publish', true)->latest()->take(15)->get();
+        $popular = Recipe::query()->where('is_publish', true)
+            ->withSum('marks', 'mark')
+            ->orderByDesc('marks_sum_mark')
+            ->take(15)
+            ->get();
         return view('recipes.topic', compact('latest', 'popular'));
     }
 
@@ -54,10 +57,15 @@ class RecipeController extends Controller
 
     public function edit(Recipe $recipe)
     {
-        return view('recipes.update', [
-            'title'=> 'Редактирование рецепта',
-            'recipe' => $recipe
-        ]);
+        if($recipe->user->id === auth()->user()->id){
+            return view('recipes.update', [
+                'title'=> 'Редактирование рецепта',
+                'recipe' => $recipe
+            ]);
+        }
+       else{
+           return redirect()->back();
+       }
     }
 
     public function random(): RedirectResponse
