@@ -126,7 +126,7 @@
                         <h2 class="text-xl mb-4">Введите название тега, который хотите добавить</h2>
                         <x-mary-input wire:model="tag_add_form.title" class="input-sm mb-2" label="Название" />
                         <div class="flex justify-end">
-                            <button @click="modalTag = false" class="btn btn-secondary btn-sm mr-3">Отмена</button>
+                            <button type="button" @click="modalTag = false" class="btn btn-secondary btn-sm mr-3">Отмена</button>
                             <button type="button" wire:click="add_tag" class="btn btn-accent btn-sm">
                                 Сохранить
                                 <span wire:target="add_tag" wire:loading class="hidden loading loading-spinner loading-sm"></span>
@@ -210,7 +210,7 @@
                             <h2 class="text-xl mb-4">Введите название ингредиента, который хотите добавить</h2>
                             <x-mary-input wire:model="ingredient_add_form.title" class="input-sm mb-2" label="Название" />
                             <div class="flex justify-end">
-                                <button @click="modalIngredient = false" class="btn btn-secondary btn-sm mr-3">Отмена</button>
+                                <button type="button" @click="modalIngredient = false" class="btn btn-secondary btn-sm mr-3">Отмена</button>
                                 <button type="button" wire:click="add_new_ingredient" class="btn btn-accent btn-sm">
                                     Сохранить
                                     <span wire:target="add_new_ingredient" wire:loading class="hidden loading loading-spinner loading-sm"></span>
