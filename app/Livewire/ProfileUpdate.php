@@ -17,7 +17,7 @@ class ProfileUpdate extends Component
     use Toast;
     use WithFileUploads;
 
-    #[Validate('nullable|image|max:1024', message: ['max' => 'Размер изображения не должен превышать 1024 кб'])]
+    #[Validate('nullable|image|max:5000', message: ['max' => 'Размер изображения не должен превышать 5000 кб'])]
     public $avatar;
     #[Validate('nullable|string')]
     public $name;

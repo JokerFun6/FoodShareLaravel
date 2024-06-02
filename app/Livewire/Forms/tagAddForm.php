@@ -9,4 +9,5 @@ class tagAddForm extends Form
 {
     #[Validate('required|string|unique:tags,title')]
     public string $title;
+
 }

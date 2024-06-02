@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function (){
     return view('welcome');
 })->name('welcome');
@@ -38,3 +39,12 @@ Route::get('recipes/random', [RecipeController::class, 'random'])->name('recipes
 Route::get('recipes/topic', [RecipeController::class, 'topic'])->name('recipes.topic');
 Route::resource('recipes', RecipeController::class);
 Route::get('recipes/{recipe}/pdf-preview', [RecipeController::class, 'preview'])->name('recipes.preview');
+
+
+Route::get('/verify-email/', function (){
+    return view('emails.verify');
+})->name('verification.notice');
+
+
+
+

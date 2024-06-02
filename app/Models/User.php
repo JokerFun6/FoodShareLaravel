@@ -6,6 +6,7 @@ namespace App\Models;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,7 +18,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class User extends Authenticatable implements FilamentUser, HasAvatar
+class User extends Authenticatable implements FilamentUser, HasAvatar, MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -33,7 +34,9 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'login',
         'email',
         'password',
-        'avatar_url'
+        'avatar_url',
+        'verification_code',
+        'is_verified'
     ];
 
     /**

@@ -3,6 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use App\Models\VerificationCodeMail;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Mary\Traits\Toast;
@@ -27,8 +30,21 @@ class RegisterForm extends Component
     public function register(){
         $data = $this->validate();
         $data['avatar_url'] = User::generateAvatar($this->login);
-        $user = User::query()->create($data);
-        return $this->success('Ваш аккаунт успешно создан🎂!', redirectTo: 'login');
+        // Generate a 4-digit verification code
+        $verificationCode = random_int(1000, 9999);
+
+        // Create user with additional verification code and status
+        $user = User::query()->create(array_merge($data, [
+            'verification_code' => $verificationCode,
+            'is_verified' => false,
+        ]));
+
+        // Send verification email
+        Mail::to($user->email)->send(new VerificationCodeMail($verificationCode));
+        session()->put('verify_code', $verificationCode);
+        session()->put('user_id', $user->id);
+        return redirect()->route('verification.notice');
+//        return $this->success('Ваш аккаунт успешно создан🎂!', redirectTo: 'login');
     }
 
     public function render()

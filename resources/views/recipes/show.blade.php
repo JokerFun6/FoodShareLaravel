@@ -106,6 +106,11 @@
                         <span class="font-black">Примерная стоимость: </span>
                         {{ $recipe->cost }} рублей
                     </li>
+                    <li class="mb-5 flex gap-1 items-center">
+                        <span class="font-black">Средняя оценка: </span>
+                        {{ number_format($recipe->avgMark(), 2) }}
+                        <x-mary-icon class="text-warning bg-warning" name="o-star" />
+                    </li>
                     <hr />
                     <li class="my-5">
                         <span class="font-black">Опубликовано: </span>

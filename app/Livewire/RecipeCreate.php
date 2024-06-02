@@ -149,7 +149,7 @@ class RecipeCreate extends Component
         $id = Tag::query()->create($data);
         array_push($this->recipe_form->selectedTags, $id->id);
         return $this->info('Категория создана');
-//        $this->tag_add_form->reset('title');
+
     }
 
     public function add_new_ingredient(){
@@ -161,7 +161,7 @@ class RecipeCreate extends Component
         $data['carbohydrates'] = 0;
         $id = Ingredient::query()->create($data);
         $this->ingredient_form->selectedIngredient = $id->id;
-        return $this->info('Ингредиент создана');
+        return $this->info('Ингредиент создан');
 //        $this->tag_add_form->reset('title');
     }
 
