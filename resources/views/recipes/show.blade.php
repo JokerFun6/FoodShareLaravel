@@ -109,7 +109,7 @@
                     <li class="mb-5 flex gap-1 items-center">
                         <span class="font-black">Средняя оценка: </span>
                         {{ number_format($recipe->avgMark(), 2) }}
-                        <x-mary-icon class="text-warning bg-warning" name="o-star" />
+                        <x-mary-icon class="text-warning" name="o-star" />
                     </li>
                     <hr />
                     <li class="my-5">
