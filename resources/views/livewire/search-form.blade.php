@@ -2,7 +2,7 @@
     <label class="input input-sm input-bordered flex items-center gap-2">
          <input
             type="search"
-            wire:model.live.debounce.150ms="query"
+            wire:model.live.debounce.300ms="query"
             x-on:blur="$wire.hideResults()"
             placeholder="Поиск"
             class="grow"

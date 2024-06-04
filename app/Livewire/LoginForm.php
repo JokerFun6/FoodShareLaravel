@@ -13,7 +13,7 @@ use Mary\Traits\Toast;
 class LoginForm extends Component
 {
     use Toast;
-    #[Validate(['required','exists:users'], as: 'Почта')]
+    #[Validate(['required'], as: 'Почта или Логин')]
     public string $email;
     #[Validate(['required'], as: 'Пароль')]
     public string $password;
@@ -22,8 +22,8 @@ class LoginForm extends Component
     public function login()
     {
         $data = $this->validate();
-
-        if (Auth::attempt($data, $this->remember)) {
+        $fieldType = filter_var($this->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
+        if (Auth::attempt([$fieldType => $this->email, 'password' => $this->password], $this->remember)) {
             $user = Auth::user();
 
             if ($user->is_verified) {

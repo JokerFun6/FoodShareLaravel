@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function (){
-    return view('welcome');
+    session()->forget(['user_id', 'verify_code']);
+    return redirect()->route('recipes.topic');
 })->name('welcome');
 
 Route::middleware('guest')->group(function (){
@@ -42,8 +43,12 @@ Route::get('recipes/{recipe}/pdf-preview', [RecipeController::class, 'preview'])
 
 
 Route::get('/verify-email/', function (){
-    return view('emails.verify');
-})->name('verification.notice');
+
+    if(session()->exists(['user_id', 'verify_code'])){
+        return view('emails.verify');
+    }
+    abort(404);
+})->name('verification.notice')->middleware('guest');
 
 
 

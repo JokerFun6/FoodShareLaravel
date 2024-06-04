@@ -32,7 +32,7 @@
                 <!-- Slides -->
                 @foreach($popular as $recipe)
                 <div class="swiper-slide ">
-                    <livewire:recipe-card :recipe="$recipe" lazy="on-load"/>
+                    <livewire:recipe-card :recipe="$recipe"/>
                 </div>
                 @endforeach
                 ...

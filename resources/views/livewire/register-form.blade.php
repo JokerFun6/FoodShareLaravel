@@ -1,7 +1,7 @@
 <div class="shadow-2xl w-full sm:w-1/2 p-4 rounded-box border-white mx-auto">
-    <h2 class="text-xl text-center">
+    <h2 class="text-xl text-center mb-2">
         Создайте аккаунт
-        <img src="{{ asset('assets/images/logo.png') }}" class="mx-auto w-1/3" alt="">
+        <img src="{{ asset('assets/images/logo-small.png') }}" class="mx-auto w-[100px]" alt="">
     </h2>
     <x-mary-form wire:submit="register">
         {{-- Full error bag --}}
