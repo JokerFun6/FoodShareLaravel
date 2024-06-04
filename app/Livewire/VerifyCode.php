@@ -38,6 +38,8 @@ class VerifyCode extends Component
         $user = User::query()->find($user_id);
         // Send verification email
         Mail::to($user->email)->send(new VerificationCodeMail($verificationCode));
+        $this->code = '';
+        $this->dispatch('resend');
         return $this->info('Код отправлен заново');
 
     }
