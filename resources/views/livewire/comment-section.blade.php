@@ -77,20 +77,20 @@
                 <div class="flex items-center flex-wrap">
                     <a
                         class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold"
-                        href="{{ route('users.index', $comment->user->id) }}"
+                        href="{{ route('users.index', $comment->user?->id) }}"
                     >
                         <img
                             class="mr-2 w-6 h-6 rounded-full"
-                            src="{{ asset('storage/' . $comment->user->avatar_url) }}"
-                            alt="{{ $comment->user->login }}"
-                        />{{ $comment->user->login }}
+                            src="{{ asset('storage/' . $comment->user?->avatar_url) }}"
+                            alt="{{ $comment->user?->login }}"
+                        />{{ $comment->user?->login }}
                     </a>
                     <p class="text-sm text-gray-600 dark:text-gray-400 mr-2">
                         <time pubdate datetime="{{ $comment->created_at }}" title="February 8th, 2022"
                         >{{ $comment->created_at->diffForHumans() }}</time
                         >
                     </p>
-                        @if($comment->user->login === auth()->user()->login)
+                        @if($comment->user?->login === auth()->user()?->login)
                             <button href="" class="text-sm text-error" wire:click="removeComment({{ $comment->id }})">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"

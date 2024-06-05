@@ -1,7 +1,7 @@
 <div class="w-full min-h-[70vh] flex flex-col gap-2 justify-center items-center" x-data="{
     showResendButton: false,
     strTime: null,
-    time: 10,
+    time: 30,
     timerInterval: null,
     startTimer() {
         this.timerInterval = setInterval(() => {
@@ -10,6 +10,7 @@
             if (this.time === 0) {
                 clearInterval(this.timerInterval);
                 this.showResendButton = true;
+                this.time=60;
             }
         }, 1000);
     },

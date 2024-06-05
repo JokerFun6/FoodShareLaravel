@@ -155,7 +155,7 @@
                     </li>
                     <li class="flex flex-wrap gap-2">
                         @foreach($recipe->tags as $tag)
-                            <a>
+                            <a href="{{ route('recipes.index', ['tags[0]' => $tag->id]) }}">
                                 <x-mary-badge value="#{{ $tag->title  }}" class="badge-accent italic badge-lg" />
                             </a>
                         @endforeach

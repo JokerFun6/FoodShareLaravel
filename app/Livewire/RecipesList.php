@@ -29,6 +29,7 @@ class RecipesList extends Component
     #[Url]
     public bool $is_allergy = false;
     public bool $showFavorites = false;
+    #[Url('tags')]
     public array $selectedTags = [];
     public array $selectedIngredients = [];
 
