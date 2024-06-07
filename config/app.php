@@ -183,6 +183,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        \SocialiteProviders\Manager\ServiceProvider::class, // add
 
         /*
          * Package Service Providers...

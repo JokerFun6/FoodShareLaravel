@@ -62,6 +62,8 @@ class CommentResource extends Resource
                 Tables\Columns\ImageColumn::make('photo_url')
                     ->square()
                     ->label('Фотография'),
+                Tables\Columns\ToggleColumn::make('is_publish')
+                    ->label('Опубликовать'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

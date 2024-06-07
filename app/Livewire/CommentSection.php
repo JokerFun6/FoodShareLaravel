@@ -42,7 +42,7 @@ class CommentSection extends Component
         }
         Comment::query()->create($commentData);
         $this->reset('text', 'photo');
-        $this->success('Ваш комментарий успешно добавлен');
+        $this->success('Комментарий на модерации');
     }
 
     public function removeComment(Comment $comment): void
@@ -67,7 +67,7 @@ class CommentSection extends Component
     public function render()
     {
         return view('livewire.comment-section', [
-            'comments'=>$this->recipe->comments->sortDesc()
+            'comments'=>$this->recipe->comments->where('is_publish', true)->sortDesc()
         ]);
     }
 }

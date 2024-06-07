@@ -17,7 +17,8 @@ class Comment extends Model
         'recipe_id',
         'user_id',
         'description',
-        'photo_url'
+        'photo_url',
+        'is_publish'
     ];
 
     protected $casts = [
