@@ -15,6 +15,13 @@ class UsersRecipes extends Component
         $this->success('Рецепт удален');
     }
 
+    public function changeVisible(int $id){
+        $recipe = Recipe::query()->find($id);
+        $recipe->is_visible = $recipe->is_visible == 1 ? 0 : 1;
+        $recipe->save();
+        $this->info('Видимость изменена');
+    }
+
     public function render()
     {
         $recipes = auth()->user()->recipes;

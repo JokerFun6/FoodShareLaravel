@@ -33,7 +33,7 @@ class UserSubscriptionBtn extends Component
     }
     public function render()
     {
-        $isSubscribed = Auth::user()->subscriptions->contains($this->userId);
+        $isSubscribed = Auth::user()?->subscriptions->contains($this->userId);
         return view('livewire.user-subscription-btn', ['isSubscribed' => $isSubscribed]);
     }
 }

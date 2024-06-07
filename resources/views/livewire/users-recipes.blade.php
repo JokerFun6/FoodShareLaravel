@@ -1,13 +1,17 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3" x-data="{ showModal: false, recipeId: null }">
     @foreach($recipes as $recipe)
-        <div class="col-span-1" wire:key="{{ $recipe->id }}">
+        <div class="col-span-1" wire:key="{{ $recipe->id }}" x-data="{popover : false}">
             <div class="h-full shadow-lg hover:bg-neutral hover:border-white hover:transition-all rounded-lg p-4 flex flex-col justify-between">
                 <div class="flex gap-1 flex-wrap flex-col justify-between items-start">
-                    <h2 class="text-xl font-semibold">
+                    <h2 class="relative text-xl font-semibold">
                         <a href="{{ route('recipes.show', $recipe->slug_title) }}">
                             {{ $recipe->title }}
                         </a>
                     </h2>
+                    <label class="pl-0 cursor-pointer label">
+                        <span class=" mr-3">Видят все</span>
+                        <input wire:change="changeVisible({{$recipe->id}})" type="checkbox" class="toggle toggle-primary" @checked($recipe->is_visible) />
+                    </label>
                     @if($recipe->is_publish)
                         <div>Статус: <span class="badge badge-success border-sm badge-lg">Опубликован</span></div>
                     @else

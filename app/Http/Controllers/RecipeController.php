@@ -24,8 +24,12 @@ class RecipeController extends Controller
     }
     public function topic()
     {
-        $latest = Recipe::query()->where('is_publish', true)->latest()->take(15)->get();
+        $latest = Recipe::query()
+            ->where('is_publish', true)
+            ->where('is_visible', true)
+            ->latest()->take(15)->get();
         $popular = Recipe::query()->where('is_publish', true)
+            ->where('is_visible', true)
             ->withSum('marks', 'mark')
             ->orderByDesc('marks_sum_mark')
             ->take(15)
@@ -70,7 +74,9 @@ class RecipeController extends Controller
 
     public function random(): RedirectResponse
     {
-        $recipe = Recipe::query()->where('is_publish', true)->inRandomOrder()->first('slug_title');
+        $recipe = Recipe::query()->where('is_publish', true)
+            ->where('is_visible', true)
+            ->inRandomOrder()->first('slug_title');
         if($recipe){
             return redirect()->route('recipes.show', $recipe);
         }

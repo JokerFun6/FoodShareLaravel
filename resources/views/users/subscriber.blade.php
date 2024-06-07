@@ -59,7 +59,7 @@
             <h2 class="text-2xl font-bold mb-4">Рецепты пользователя</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 {{--                @foreach ($user->recipes->where('is_publish', true) as $recipe)--}}
-                @forelse($user->recipes as $recipe)
+                @forelse($user->recipes->where('is_visible', true)->where('is_publish', true) as $recipe)
                     <livewire:recipe-card :recipe="$recipe" />
                 @empty
                     Пользователь пока не публиковал рецепты

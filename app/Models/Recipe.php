@@ -26,7 +26,8 @@ class Recipe extends Model
         'cost',
         'nationality_id',
         'is_publish',
-        'user_id'
+        'user_id',
+        'is_visible'
     ];
 
     protected $casts = [

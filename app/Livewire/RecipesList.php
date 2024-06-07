@@ -49,6 +49,7 @@ class RecipesList extends Component
         $ingredients = Ingredient::query()->orderBy('title')->get();
         $recipes = Recipe::query()
             ->where('is_publish', true)
+            ->where('is_visible', true)
             ->where('title','like','%'.$this->query.'%')
             ->when($this->level, function (Builder $query){
                 $query->where('complexity', '=', $this->level);
