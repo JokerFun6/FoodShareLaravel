@@ -30,7 +30,7 @@
             searchable
             no-result-text="ничего не нашли"
         />
-        <button class="btn btn-outline btn-info btn-sm w-1/2 mx-auto" wire:click="save">Сохранить</button>
+        <button type="button" class="btn btn-outline btn-info btn-sm w-1/2 mx-auto" wire:click="save">Сохранить</button>
 
     </div>
 
