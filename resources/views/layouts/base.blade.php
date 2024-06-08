@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-small.png') }}" type="image/png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     @yield('styles')
-
     @vite(['resources/css/app.css','resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
     <title>@yield('title')</title>
     <style>
         [x-cloak] { display: none !important; }

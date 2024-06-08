@@ -17,7 +17,7 @@ class CommentSection extends Component
     use WithFileUploads;
 
     public Recipe $recipe;
-    #[Validate('nullable|image|max:1024', message: ['max' => 'Размер изображения не должен превышать 1024 кб'])]
+    #[Validate('nullable|image|max:1600', message: ['max' => 'Размер изображения не должен превышать 1600 кб'])]
     public $photo;
     #[Validate(['required','string','min:10'], as: 'Комментарий')]
     public string $text;

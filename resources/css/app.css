@@ -1,10 +1,8 @@
+@import 'swiper/css/bundle';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-    font-family: Mulish, sans-serif;
-}
 /* Table pagination: active page highlight */
 .mary-table-pagination span[aria-current="page"] > span {
     @apply bg-primary text-base-100

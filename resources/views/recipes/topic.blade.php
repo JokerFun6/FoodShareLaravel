@@ -1,11 +1,11 @@
 @extends('layouts.base')
 
 @section('styles')
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+{{--    <link--}}
+{{--        rel="stylesheet"--}}
+{{--        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"--}}
+{{--    />--}}
+{{--    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>--}}
 @endsection
 
 @section('title')
@@ -38,7 +38,7 @@
                 ...
             </div>
             <!-- If we need pagination -->
-            <div class="swiper-pagination"></div>
+
 
             <!-- If we need navigation buttons -->
             <div class="swiper-button-prev"></div>
@@ -60,8 +60,6 @@
 
                 ...
             </div>
-            <!-- If we need pagination -->
-            <div class="swiper-pagination"></div>
 
             <!-- If we need navigation buttons -->
             <div class="swiper-button-prev"></div>
@@ -72,48 +70,5 @@
         </div>
     </main>
 
-    <script>
-        document.addEventListener('livewire:navigated', ()=>{
-            const swiper = new Swiper('.swiper', {
-                effect: 'coverflow',
-                coverflowEffect: {
-                    rotate: 30,
-                    slideShadows: false,
-                },
 
-                direction: 'horizontal',
-                loop: true,
-
-                // If we need pagination
-                pagination: {
-                    el: '.swiper-pagination',
-                },
-
-                // Navigation arrows
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                breakpoints: {
-                    // when window width is >= 320px
-                    320: {
-                        slidesPerView: 1,
-                        spaceBetween: 20
-                    },
-                    // when window width is >= 480px
-                    700: {
-                        slidesPerView: 2,
-                        spaceBetween: 10
-                    },
-                    // when window width is >= 640px
-                    1000: {
-                        slidesPerView: 3,
-                        spaceBetween: 40
-                    }
-                }
-                // And if we need scrollbar
-
-            });
-        })
-    </script>
 @endsection
