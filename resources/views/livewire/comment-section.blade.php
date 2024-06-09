@@ -91,7 +91,7 @@
                         >
                     </p>
                         @if($comment->user?->login === auth()->user()?->login)
-                            <button href="" class="text-sm text-error" wire:click="removeComment({{ $comment->id }})">
+                            <button href="" class="text-sm text-error" wire:confirm="Вы действительно хотите удалить комментарий?" wire:click="removeComment({{ $comment->id }})">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"

@@ -12,8 +12,24 @@ class RatingForm extends Component
     use Toast;
 
     public Recipe $recipe;
-    public int $mark = 5;
+    public int $mark = 0;
 
+    public function mount(Recipe $recipe)
+    {
+        $this->recipe = $recipe;
+
+        if (auth()->check()) {
+            $user = auth()->user();
+            $existingMark = Mark::query()
+                ->where('user_id', $user->id)
+                ->where('recipe_id', $this->recipe->id)
+                ->first();
+
+            if ($existingMark) {
+                $this->mark = $existingMark->mark;
+            }
+        }
+    }
     public function createMark()
     {
         if(auth()->check()){

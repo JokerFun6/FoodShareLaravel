@@ -202,6 +202,7 @@ class RecipeCreate extends Component
                 'cost' => $this->recipe_form->recipe_cost,
                 'complexity' => $this->recipe_form->recipe_level,
                 'nationality_id' => $this->recipe_form->nation_id,
+                'is_publish' => false,
                 'photo_url' => $resizedImagePath ? $resizedImagePath : $this->recipe->photo_url,
                 'user_id' => auth()->user()->id,
             ]);

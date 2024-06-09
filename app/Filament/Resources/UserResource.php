@@ -20,7 +20,7 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
     protected static ?string $pluralModelLabel = 'Пользователи';
     protected static ?string $modelLabel = 'Пользователь';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
     {
@@ -32,9 +32,6 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('lastname')
                     ->maxLength(255)
                     ->label('Фамилия'),
-                Forms\Components\Textarea::make('about_info')
-                    ->columnSpanFull()
-                    ->label('Информация о пользователе'),
                 Forms\Components\TextInput::make('login')
                     ->required()
                     ->maxLength(255)
@@ -47,7 +44,6 @@ class UserResource extends Resource
                     ->imageEditor()
                     ->circleCropper()
                     ->label('Аватар'),
-
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
@@ -117,7 +113,6 @@ class UserResource extends Resource
     {
         return [
             'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }

@@ -62,13 +62,15 @@
                 </div>
             @endif
             <x-mary-input type="number"
-                          class="input-sm"
-                          label="Время приготовления"
-                          wire:model="recipe_form.preparation_time"
-                          suffix="Минут" />
+                class="input-sm"
+                min="1"
+                label="Время приготовления"
+                wire:model="recipe_form.preparation_time"
+                suffix="Минут" />
             <x-mary-input
                 type="number"
                 class="input-sm"
+                min="1"
                 label="Количество порций"
                 wire:model="recipe_form.amount_services"
                 suffix="Порций" />

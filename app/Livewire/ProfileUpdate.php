@@ -57,6 +57,7 @@ class ProfileUpdate extends Component
             if ($user->photo_url != 'users_data/user.png') {
                 Storage::delete('public/' . $user->avatar_url);
             }
+            dd($this->avatar);
             $imagePath = $this->avatar->store('public/users_data');
             $imagePath = Str::after($imagePath, 'public/');
             User::query()->find( $user->id)->update([
