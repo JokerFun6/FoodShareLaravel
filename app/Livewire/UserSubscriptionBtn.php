@@ -14,22 +14,26 @@ class UserSubscriptionBtn extends Component
 
     public function subscribe()
     {
-        $user = Auth::user();
-        $targetUser = User::find($this->userId);
+        if (Auth::check()){
+            $user = Auth::user();
+            $targetUser = User::find($this->userId);
+            // Проверка, чтобы пользователь не мог подписаться сам на себя
+            if ($user->id == $this->userId) {
+                return;
+            }
 
-        // Проверка, чтобы пользователь не мог подписаться сам на себя
-        if ($user->id == $this->userId) {
-            return;
+            // Проверка, если уже есть подписка
+            if ($user->subscriptions()->where('subscribed_to_id', $this->userId)->exists()) {
+                $user->subscriptions()->detach($targetUser->id);
+                return $this->info('Подписка отменена');
+            } else {
+                $user->subscriptions()->attach($targetUser->id);
+                return $this->info('Вы подписались');
+            }
+        }else{
+            return $this->warning('Необходимо авторизоваться');
         }
 
-        // Проверка, если уже есть подписка
-        if ($user->subscriptions()->where('subscribed_to_id', $this->userId)->exists()) {
-            $user->subscriptions()->detach($targetUser->id);
-            return $this->info('Подписка отменена');
-        } else {
-            $user->subscriptions()->attach($targetUser->id);
-            return $this->info('Вы подписались');
-        }
     }
     public function render()
     {

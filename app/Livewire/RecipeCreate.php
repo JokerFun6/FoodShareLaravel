@@ -38,7 +38,6 @@ class RecipeCreate extends Component
     public ingredientForm $ingredient_form;
     public stepForm $step_form;
     public $is_edit = false;
-    #[Url]
     public int $stage = 1;
 
     public function mount($recipe = null){
@@ -171,10 +170,10 @@ class RecipeCreate extends Component
         if ($this->recipe_form->recipe_photo){
             $image = Image::read($this->recipe_form->recipe_photo);
             $resizedImage = $image->cover(800, 450);
-            $resizedImagePath = public_path('storage\\recipes_data\\'.Str::uuid().'.jpg');
-//            dd(Str::after($resizedImagePath, '\\storage\\'));
+            $resizedImagePath = public_path('storage/recipes_data/'.Str::uuid().'.jpg');
+//            dd($resizedImagePath);
             $resizedImage->save($resizedImagePath);
-            $resizedImagePath = Str::after($resizedImagePath, '\\storage\\');
+            $resizedImagePath = Str::after($resizedImagePath, 'storage/');
         }else if($this->recipe_form->photo_url == ''){
             // Использование
             $api = new ImageGenerator('https://api-key.fusionbrain.ai/', config('app.api_key'), config('app.api_secret_key'));

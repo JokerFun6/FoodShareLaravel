@@ -23,7 +23,7 @@ class recipeForm extends Form
     public string $recipe_description;
     #[Validate('required|numeric|min:1', as: 'Время приготовления')]
     public string $preparation_time;
-    #[Validate('required|numeric|min:1', as: 'Количество порций')]
+    #[Validate('required|numeric|min:1|max:100', as: 'Количество порций')]
     public string $amount_services;
     #[Validate('required|string', as: 'Уровень сложности')]
     public string $recipe_level;
