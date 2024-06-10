@@ -174,8 +174,8 @@ class RecipeCreate extends Component
             $resizedImagePath = public_path('storage\\recipes_data\\'.Str::uuid().'.jpg');
 //            dd(Str::after($resizedImagePath, '\\storage\\'));
             $resizedImage->save($resizedImagePath);
-            $resizedImage = Str::after($resizedImagePath, '\\storage\\');
-        }else{
+            $resizedImagePath = Str::after($resizedImagePath, '\\storage\\');
+        }else if($this->recipe_form->photo_url == ''){
             // Использование
             $api = new ImageGenerator('https://api-key.fusionbrain.ai/', config('app.api_key'), config('app.api_secret_key'));
             $modelId = $api->getModel();

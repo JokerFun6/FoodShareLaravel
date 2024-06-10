@@ -32,6 +32,7 @@ class recipeForm extends Form
     #[Validate('required|numeric|min:1', as: 'Национальность', message: 'Выберите национальность блюда')]
     public $nation_id;
     public array $selectedTags;
+
     public string $photo_url = '';
 
     public function save_recipe(){

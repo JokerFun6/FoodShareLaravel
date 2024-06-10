@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Http;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar, MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -30,7 +30,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, MustVerif
     protected $fillable = [
         'name',
         'lastname',
-        'about_info',
         'login',
         'email',
         'password',
