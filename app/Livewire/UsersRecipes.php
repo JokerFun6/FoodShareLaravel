@@ -24,7 +24,7 @@ class UsersRecipes extends Component
 
     public function render()
     {
-        $recipes = auth()->user()->recipes;
+        $recipes = auth()->user()->recipes()->latest()->get();
         return view('livewire.users-recipes', ['recipes' => $recipes]);
     }
 }

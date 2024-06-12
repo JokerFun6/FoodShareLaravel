@@ -6,14 +6,19 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Mail;
 
 class UserResource extends Resource
 {
@@ -61,12 +66,6 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable()
-                    ->label('Имя'),
-                Tables\Columns\TextColumn::make('lastname')
-                    ->searchable()
-                    ->label('Фамилия'),
                 Tables\Columns\TextColumn::make('login')
                     ->searchable()
                     ->label('Логин'),
@@ -78,11 +77,17 @@ class UserResource extends Resource
                     ->label('Почта'),
                 Tables\Columns\ToggleColumn::make('admin')
                     ->label('Админ'),
+
+                Tables\Columns\TextColumn::make('reason_ban')
+                    ->label('Причина блокирования')
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
-                    ->label('Дата создания'),
+                    ->label('Дата регистрации'),
             ])
             ->filters([
                 Filter::make('admin')
@@ -92,11 +97,54 @@ class UserResource extends Resource
 
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+//              Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->fillForm(fn (User $record): array => [
+                        'comment' => $record->reason_ban,
+                    ])
+                    ->form([
+                        Forms\Components\TextInput::make('comment')
+                            ->label('Причина блокировки')
+                            ->required(fn(User $record) => $record->ban === 0),
+                    ])
+                    ->action(function (array $data, User $record)
+                    {
+                        $record->reason_ban = $record->ban === 0 ? $data['comment'] : null;
+                        $record->ban = !$record->ban;
+                        $record->save();
+                    })
+                    ->label(function(User $record){
+                        return $record->ban === 1 ? "Разблокировать" : "Заблокировать";
+                     })
+                    ->modalHeading(function(User $record){
+                        return $record->ban === 1 ? "Разблокировать пользователя" : "Заблокировать пользователя";
+                    })
+                    ->modalDescription('')
+                    ->modalSubmitActionLabel('Да')
+                    ->modalIcon('heroicon-o-user')
+                    ->icon('heroicon-m-user-minus')
+                    ->color(function(User $record){
+                        return $record->ban === 1 ? 'success' : "danger";
+                    })
+
+//                    ->requiresConfirmation(),
+
+//                Action::make('sendEmail')
+//                    ->form([
+//                        TextInput::make('subject')->required(),
+//                        RichEditor::make('body')->required(),
+//                    ])
+//                    ->action(function (array $data) {
+//                        Mail::to($this->client)
+//                            ->send(new GenericEmail(
+//                                subject: $data['subject'],
+//                                body: $data['body'],
+//                            ));
+//                    })
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+//                    Tables\Actions\DeleteBulkAction::make(),
 
                 ]),
             ]);
@@ -113,7 +161,7 @@ class UserResource extends Resource
     {
         return [
             'index' => Pages\ListUsers::route('/'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+//            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 }

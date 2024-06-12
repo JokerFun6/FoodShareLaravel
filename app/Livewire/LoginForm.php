@@ -25,7 +25,10 @@ class LoginForm extends Component
         $fieldType = filter_var($this->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
         if (Auth::attempt([$fieldType => $this->email, 'password' => $this->password], $this->remember)) {
             $user = Auth::user();
-
+            if ($user->ban) {
+                Auth::logout();
+                return $this->error('Ваш аккаунт заблокирован по причине "' . $user->reason_ban . '"');
+            }
             if ($user->is_verified) {
                 request()->session()->regenerate();
                 return $this->success('Вы успешно вошли в систему', redirectTo: 'recipes/topic');

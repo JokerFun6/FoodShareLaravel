@@ -35,7 +35,9 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, MustVerif
         'password',
         'avatar_url',
         'verification_code',
-        'is_verified'
+        'is_verified',
+        'ban',
+        'reason_ban'
     ];
 
     /**

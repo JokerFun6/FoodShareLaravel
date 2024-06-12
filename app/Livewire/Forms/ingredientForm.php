@@ -13,7 +13,7 @@ class ingredientForm extends Form
     #[Validate('required|numeric', as: 'Значение')]
     public string $value;
     #[Validate('required|string', as: 'Мера')]
-    public string $measure = "";
+    public string $measure = "кг";
     #[Validate('nullable|string|max:255', 'Примечание')]
     public string $comment;
 
