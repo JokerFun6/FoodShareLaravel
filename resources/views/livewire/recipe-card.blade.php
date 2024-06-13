@@ -1,8 +1,8 @@
-<div x-data="{ open: false }" class="relative h-[250px] overflow-hidden rounded-lg shadow-lg hover:scale-110 transition ease-in-out delay-150 duration-300">
-    <img src="{{ asset('storage/'. $recipe->photo_url) }}" alt="Recipe" class="absolute inset-0 object-cover w-full h-full opacity-70">
-    <div href="{{ route('recipes.show', $recipe) }}" class="relative flex flex-col justify-between h-full p-6 bg-black bg-opacity-50">
+<div x-data="{ open: false, ishover : false }" @mouseenter="ishover=true" @mouseleave="ishover=false" class="relative h-[250px] overflow-hidden rounded-lg shadow-lg  ">
+    <img src="{{ asset('storage/'. $recipe->photo_url) }}" :class="{ 'blur-sm': ishover, 'scale-110': ishover }" alt="Recipe" class="absolute inset-0 object-cover w-full h-full opacity-70 transition ease-in-out delay-150 duration-300">
+    <div href="{{ route('recipes.show', $recipe) }}" class="relative flex flex-col justify-between h-full p-6 bg-black bg-opacity-30">
         <div class="flex justify-between items-center">
-            <h2 class="text-xl font-bold text-white">{{ $recipe->title }}</h2>
+            <a href="{{ route('recipes.show', $recipe) }}" class="text-xl font-bold text-white">{{ $recipe->title }}</a>
             <button
                 class="rounded-full p-2 border border-error"
                 wire:click.throttling.1000ms.debounce.0ms.="toggle()"
@@ -40,11 +40,11 @@
                 x-show="open"
                 x-transition.debounce.750ms
                 @click.away="open = false"
-                class="absolute left-0 top-0 z-10 w-[95%] mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+                class="absolute left-0 top-0 z-10 w-[95%] mt-2 rounded-md shadow-lg bg-base-100 ring-1 ring-black ring-opacity-5"
             >
                 <div class="p-4">
-                    <p class="text-sm text-gray-700 pb-1 border-b">Ингредиенты</p>
-                    <p class="text-sm text-gray-700">
+                    <p class="text-sm  pb-1 border-b">Ингредиенты</p>
+                    <p class="text-sm ">
                         @foreach($recipe->ingredients as $ingredient)
                             {{ $ingredient->title }},
                         @endforeach

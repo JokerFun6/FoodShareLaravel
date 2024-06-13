@@ -22,7 +22,7 @@
                 <div class="mt-4">
                     <div class="grid grid-cols-1 min-[500px]:grid-cols-3 gap-4">
 
-                        <div class="flex items-center p-1 bg-white cursor-pointer hover:scale-105 hover:shadow-lg transition-all border border-gray-200 rounded-lg shadow-sm">
+                        <div class="flex items-center p-1 bg-base-100 cursor-pointer hover:scale-105 hover:shadow-lg transition-all border border-gray-200 rounded-lg shadow-sm">
                             <div class="ml-4">
                                 <div class="text-sm sm:text-lg font-medium text-secondary">Подписчики</div>
                                 <div class="text-2xl font-bold text-primary">{{ $user->subscribedTo()->count() }}</div>
@@ -30,7 +30,7 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center p-1 bg-white cursor-pointer hover:scale-105 hover:shadow-lg transition-all border border-gray-200 rounded-lg shadow-sm">
+                        <div class="flex items-center p-1 bg-base-100 cursor-pointer hover:scale-105 hover:shadow-lg transition-all border border-gray-200 rounded-lg shadow-sm">
                             <div class="ml-4">
                                 <div class="text-sm sm:text-lg font-medium text-secondary">Подписки</div>
                                 <div class="text-2xl font-bold text-primary">{{ $user->subscriptions()->count() }}</div>
@@ -38,7 +38,7 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center p-1 bg-white cursor-pointer hover:scale-105 hover:shadow-lg transition-all border border-gray-200 rounded-lg shadow-sm">
+                        <div class="flex items-center p-1 bg-base-100 cursor-pointer hover:scale-105 hover:shadow-lg transition-all border border-gray-200 rounded-lg shadow-sm">
                             <div class="ml-4">
                                 <div class="text-sm sm:text-lg font-medium text-secondary">Рецепты</div>
                                 <div class="text-2xl font-bold text-primary">{{ $user->recipes()->count() }}</div>

@@ -27,40 +27,6 @@ class UserResource extends Resource
     protected static ?string $modelLabel = 'Пользователь';
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->maxLength(255)
-                    ->label('Имя'),
-                Forms\Components\TextInput::make('lastname')
-                    ->maxLength(255)
-                    ->label('Фамилия'),
-                Forms\Components\TextInput::make('login')
-                    ->required()
-                    ->maxLength(255)
-                    ->label('Логин'),
-                Forms\Components\FileUpload::make('avatar_url')
-                    ->image()
-                    ->disk('public')
-                    ->directory('users_data')
-                    ->avatar()
-                    ->imageEditor()
-                    ->circleCropper()
-                    ->label('Аватар'),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255)
-                    ->label('Адрес почты'),
-                Forms\Components\Toggle::make('admin')
-                    ->required()
-                    ->label('Админ'),
-
-
-            ])->columns(1);
-    }
 
     public static function table(Table $table): Table
     {
@@ -111,6 +77,7 @@ class UserResource extends Resource
                     {
                         $record->reason_ban = $record->ban === 0 ? $data['comment'] : null;
                         $record->ban = !$record->ban;
+                        $record->remember_token = $record->ban === 1 ? '' : $record->remember_token;
                         $record->save();
                     })
                     ->label(function(User $record){

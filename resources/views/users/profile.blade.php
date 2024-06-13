@@ -42,7 +42,7 @@
                         <div x-cloak x-show="activeTab === 'tab2'" class="" x-transition>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3" x-data="{ showModal2: false, userId: null }">
                                 @forelse($subcriptions as $subcription)
-                                    <div class="bg-white grid grid-cols-2 justify-center gap-2 items-center rounded-lg shadow-lg p-6 w-full text-center">
+                                    <div class="bg-base-100 grid grid-cols-2 justify-center gap-2 items-center rounded-lg shadow-lg p-6 w-full text-center">
                                         <a href="{{ route('users.index', $subcription->id) }}">
                                             <img src="{{ asset('storage/' . $subcription->avatar_url) }}" alt="User Avatar" class="w-20 h-20 mx-auto rounded-full">
                                         </a>

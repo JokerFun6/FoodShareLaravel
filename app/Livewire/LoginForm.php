@@ -27,7 +27,7 @@ class LoginForm extends Component
             $user = Auth::user();
             if ($user->ban) {
                 Auth::logout();
-                return $this->error('Ваш аккаунт заблокирован по причине "' . $user->reason_ban . '"');
+                return $this->error('Ваш аккаунт заблокирован по причине "' . $user->reason_ban . '"', timeout: 6000);
             }
             if ($user->is_verified) {
                 request()->session()->regenerate();

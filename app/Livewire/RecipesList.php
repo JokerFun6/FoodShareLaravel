@@ -13,7 +13,7 @@ use Livewire\WithPagination;
 
 class RecipesList extends Component
 {
-    use WithPagination, WithoutUrlPagination;
+    use WithPagination;
 
     public $sortBy = 'created_at';
     public $sortDirection = 'desc';

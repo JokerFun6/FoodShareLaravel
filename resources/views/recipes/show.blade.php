@@ -14,7 +14,7 @@
             <div class="">
                 <img
                     src="{{ asset('storage/'. $recipe->photo_url) }}"
-                    class="rounded-lg border-primary border-2 mb-3 hover:shadow-xl hover:shadow-primary"
+                    class="rounded-lg border-primary border-2 mb-3 transition ease-in-out delay-200 hover:shadow-xl hover:shadow-primary"
                     alt=""
                 />
 {{--                rating--}}
@@ -24,9 +24,9 @@
             <div class="information">
                 <div class="" x-data="ingredientCounter({{ $recipe->amount_services }}, {{ $recipe->ingredients->toJson() }})">
                     <ul class="mt-0 bg-base-100 rounded-box mb-3">
-                        <li class="menu-title text-accent-content text-center text-xl">Список Ингредиентов</li>
+                        <li class="menu-title text-center text-xl">Список Ингредиентов</li>
                         <form class="max-w-xs mx-auto mb-4">
-                            <label for="counter-input" class="block mb-1 font-medium text-black text-center">
+                            <label for="counter-input" class="block mb-1 font-medium text-center">
                                 Выберите количество порций:
                             </label>
                             <div class="relative justify-center flex items-center">
@@ -35,8 +35,8 @@
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
                                     </svg>
                                 </button>
-                                <input type="text" id="counter-input" x-model="counter" class="flex-shrink-0 text-gray-900 border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center" required readonly />
-                                <button type="button" @click="increment" class="flex-shrink-0 bg-accent light:bg-accent hover:bg-gray-600 inline-flex items-center justify-center border border-gray-300 rounded-md h-5 w-5 focus:ring-gray-100 focus:ring-2 focus:outline-none">
+                                <input type="text" @input="counter = $event.target.value.replace(/[^0-9]/g, '').slice(0, 3)" id="counter-input" x-model="counter" class="flex-shrink-0 border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center" required />
+                                <button type="button" @click="increment" class="flex-shrink-0 bg-accent inline-flex items-center justify-center border border-gray-300 rounded-md h-5 w-5 focus:ring-gray-100 focus:ring-2 focus:outline-none">
                                     <svg class="w-2.5 h-2.5 text-gray-900 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
                                     </svg>
@@ -65,7 +65,7 @@
                                             <div
                                                 x-show="showPopover"
                                                 x-cloak
-                                                class="absolute right-0 w-[200px] bg-white border border-gray-300 z-[999] shadow-lg p-2 rounded-md"
+                                                class="absolute right-0 w-[200px] bg-base-100 border border-gray-300 z-[999] shadow-lg p-2 rounded-md"
                                             >
                                                 <ul>
                                                     <li class="text-center">На 100 грамм:</li>
@@ -174,18 +174,18 @@
             </h1>
             @foreach($recipe->steps as $step)
                 <div
-                    class="step bg-accent border max-w-[1000px] border-white p-7 rounded-box grid grid-cols-1 lg:grid-cols-2 md:col-span-1 gap-3 justify-center items-start shadow hover:shadow-white"
+                    class="step bg-accent border max-w-[1000px] border-base-100 p-7 rounded-box grid grid-cols-1 lg:grid-cols-2 md:col-span-1 gap-3 justify-center items-start shadow hover:shadow-lg shadow hover:shadow-base-100"
                 >
                     @if($step->photo_url)
                         <div class="max-w-[450px] self-center justify-self-center">
                             <img
                                 src="{{ asset('storage/' . $step->photo_url) }}"
-                                class="border border-white rounded-box"
+                                class="border border-base-100 rounded-box"
                                 alt="Изображение отсутствует"
                             />
                         </div>
                     @endif
-                    <p>
+                    <p class="text-black">
                         <span class="font-black ">Шаг {{ $loop->iteration }}. </span>
                         {{ $step->description }}
                     </p>

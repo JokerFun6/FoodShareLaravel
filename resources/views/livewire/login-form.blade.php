@@ -12,7 +12,7 @@
         <x-mary-checkbox class="checkbox checkbox-primary" label="Запомнить меня" wire:model="remember"/>
 
         <div class="divider">Или</div>
-        <a href="{{ route('auth.yandex') }}" class="btn flex items-center justify-center gap-3">
+        <a href="{{ route('auth.yandex') }}" class="btn flex items-center bg-base-100 border-none justify-center gap-3">
             Войти через
             <img src="{{ asset('assets/images/yandex.png') }}" width="45" alt="">
         </a>

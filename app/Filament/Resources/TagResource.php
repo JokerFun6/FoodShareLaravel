@@ -50,9 +50,11 @@ class TagResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->searchable()
                     ->label('Название'),
-                Tables\Columns\TextColumn::make('slug_title')
-                    ->searchable()
-                    ->label('Слаг'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->sortable()
+                    ->dateTime()
+                    ->label('Дата создания')
+                    ,
             ])
             ->filters([
                 //

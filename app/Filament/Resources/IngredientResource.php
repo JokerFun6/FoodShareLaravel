@@ -88,6 +88,11 @@ class IngredientResource extends Resource
                     ->numeric()
                     ->sortable()
                     ->label('Белки'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->sortable()
+                    ->dateTime()
+                    ->label('Дата создания')
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

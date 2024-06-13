@@ -4,7 +4,7 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between items-center mb-6">
             <h2
-                class="text-lg lg:text-2xl text-black font-bold"
+                class="text-lg lg:text-2xl font-bold"
             >
                 Комментарии ({{ $recipe->comments()->count() }})
             </h2>
@@ -13,13 +13,13 @@
         <form class="mb-6" wire:submit.prevent="addComment">
 
             <div
-                class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200"
+                class="py-2 px-4 mb-4 bg-base-100 rounded-lg rounded-t-lg border border-gray-200"
             >
                 <label for="comment" class="sr-only">Твой комментарий</label>
                 <textarea
                     id="comment"
                     rows="6"
-                    class="px-0 w-full text-sm border-0 focus:ring-0 focus:outline-none"
+                    class="px-0 w-full bg-base-100 text-sm border-0 focus:ring-0 focus:outline-none"
                     placeholder="Оставьте комментарий"
                     required
                     wire:model="text"
@@ -72,11 +72,11 @@
             <div class="text-center text-info mb-7 text-xl">Войдите в систему, чтобы оставить комментарий</div>
         @endauth
         @forelse($comments as $comment)
-            <article wire:key="{{ $comment->id }}" class="p-6 text-base mb-5 bg-white rounded-lg shadow-xl">
+            <article wire:key="{{ $comment->id }}" class="p-6 text-base mb-5 rounded-lg shadow-xl shadow-neutral">
             <footer class="flex justify-between items-center mb-2">
                 <div class="flex items-center flex-wrap">
                     <a
-                        class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold"
+                        class="inline-flex items-center mr-3 text-sm font-semibold"
                         href="{{ route('users.index', $comment->user?->id) }}"
                     >
                         <img
@@ -85,7 +85,7 @@
                             alt="{{ $comment->user?->login }}"
                         />{{ $comment->user?->login }}
                     </a>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mr-2">
+                    <p class="text-sm mr-2">
                         <time pubdate datetime="{{ $comment->created_at }}" title="February 8th, 2022"
                         >{{ $comment->created_at->diffForHumans() }}</time
                         >
@@ -110,7 +110,7 @@
                         @endif
                 </div>
             </footer>
-            <p class="text-gray-500 mb-3">
+            <p class="mb-3">
                 {{ $comment->description }}
             </p>
                 <img src="{{ asset('storage/'.$comment->photo_url) }}" class="w-[250px] rounded-box" alt="">
