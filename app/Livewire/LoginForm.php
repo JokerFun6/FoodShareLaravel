@@ -2,9 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Models\ResetPasswordMail;
+use App\Models\User;
 use App\Models\VerificationCodeMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -17,11 +21,14 @@ class LoginForm extends Component
     public string $email;
     #[Validate(['required'], as: 'Пароль')]
     public string $password;
+    #[Validate('nullable|email|exists:users,email', as: 'почта восстановления')]
+    public string $reset_email;
     public bool $remember = false;
 
     public function login()
     {
-        $data = $this->validate();
+        $data['email'] = $this->validateOnly('email');
+        $data['password'] = $this->validateOnly('password');
         $fieldType = filter_var($this->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
         if (Auth::attempt([$fieldType => $this->email, 'password' => $this->password], $this->remember)) {
             $user = Auth::user();
@@ -43,6 +50,16 @@ class LoginForm extends Component
         }
 
         return $this->error('Данные введены некорректно');
+    }
+
+    public function reset_password(){
+        $this->validateOnly('reset_email');
+        $user = User::query()->where('email', $this->reset_email)->firstOrFail();
+        $new_password = Str::random(8);
+        $user->password = $new_password;
+        $user->save();
+        Mail::to($user->email)->send(new ResetPasswordMail($new_password));
+        $this->info('Новый пароль отправлен на почту');
     }
 
     public function render()

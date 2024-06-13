@@ -19,10 +19,10 @@
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
                     <img src="{{ asset('assets/images/logo-small.png') }}" alt="Site Logo" class="h-16 w-16 object-cover rounded-full">
-                    <h1 class="text-3xl font-bold">FoodShare</h1>
+                    <h1 class="text-3xl font-bold text-base-100">FoodShare</h1>
                 </div>
                 <!-- Info -->
-                <p class="max-w-lg text-lg">Добро пожаловать на наш сайт, где вы найдете множество вкусных и разнообразных рецептов! Исследуйте популярные и последние опубликованные рецепты ниже.</p>
+                <p class="max-w-lg text-base-100 text-lg">Добро пожаловать на наш сайт, где вы найдете множество вкусных и разнообразных рецептов! Исследуйте популярные и последние опубликованные рецепты ниже.</p>
             </div>
         </header>
         <div class="swiper">

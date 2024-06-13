@@ -50,5 +50,8 @@ export default {
     },
 
     // Add daisyUI
-    plugins: [require("daisyui")]
+    plugins: [
+        require("daisyui"),
+        require('tailwind-scrollbar')({ nocompatible: true }),
+    ]
 }

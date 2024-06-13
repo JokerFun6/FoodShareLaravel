@@ -90,7 +90,7 @@
                         </span>
                 @enderror
             </label>
-            <x-mary-input type="number" class="input-sm" label="Примерная стоимость" wire:model="recipe_form.recipe_cost" suffix="Рублей" />
+            <x-mary-input type="number" min="10" class="input-sm" label="Примерная стоимость" wire:model="recipe_form.recipe_cost" suffix="Рублей" />
             <label class="form-control w-full">
                 <div class="label">
                     <span class="label-text">Выберите национальность блюда</span>

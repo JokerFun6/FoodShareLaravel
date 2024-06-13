@@ -12,7 +12,7 @@
 @section('content')
     <main class="mx-auto max-w-[1440px] mt-4 p-3">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div class="form-update col-span-full md:col-span-1 p-3 shadow-xl rounded-box border border-white">
+            <div class="form-update col-span-full md:col-span-1 p-3 shadow-xl rounded-box">
                <livewire:profile-update />
             </div>
             <div class="form-update col-span-full md:col-span-2 shadow-xl rounded-box border border-white">

@@ -3,6 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Table pagination: active page highlight */
 .mary-table-pagination span[aria-current="page"] > span {
     @apply bg-primary text-base-100
@@ -25,3 +26,5 @@
 .swiper-button-next:after, .swiper-button-prev:after {
     @apply text-primary;
 }
+
+
