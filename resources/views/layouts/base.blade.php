@@ -17,7 +17,7 @@
     <nav class="mx-auto max-w-[1440px]" x-data="{ open: false, dropdownOpen: false }">
         <div class="max-w-screen mx-auto p-4 flex items-center justify-between">
             <div class="flex items-center justify-center">
-                <a x-data="{darkMode: $persist()}" @mode.window="darkMode = $event.detail" href="{{ route('recipes.topic') }}" class="flex items-center justify-center min-[940px]:mr-10 ">
+                <a x-data="{darkMode: $persist(false)}" @mode.window="darkMode = $event.detail" href="{{ route('recipes.topic') }}" class="flex items-center justify-center min-[940px]:mr-10 ">
                     <img :src="darkMode === 'dark' ? '{{ asset('assets/images/logo-dark.png') }}' : '{{ asset('assets/images/logo.png') }}'"
                          class="h-10 md:w-full"
                          x-init="$watch('darkMode', value => console.log(value))"
@@ -42,7 +42,7 @@
                             src="{{ asset('storage/'. auth()->user()->avatar_url) }}"
                         />
                         <div x-cloak x-show="dropdownOpen" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 w-48 bg-base-100 rounded-md shadow-lg py-2 z-20 ">
-                            <div x-data="{ darkMode: $persist('') }">
+                            <div x-data="{ darkMode: $persist(false) }">
                                 <label class="flex justify-center cursor-pointer gap-2 p-2 mx-auto">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <circle cx="12" cy="12" r="5"/>
