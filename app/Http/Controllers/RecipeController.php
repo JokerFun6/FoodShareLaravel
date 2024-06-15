@@ -41,6 +41,7 @@ class RecipeController extends Controller
     {
         if($recipe->is_publish || auth()->user()?->id === $recipe->user->id){
             $recipe->loadAvg('marks', 'mark');
+            $recipe->increment('views');
             return view('recipes.show', compact('recipe'));
         }
         abort(404);

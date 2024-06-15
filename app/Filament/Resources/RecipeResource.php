@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RecipeResource\Pages;
 use App\Filament\Resources\RecipeResource\RelationManagers;
 use App\Models\Recipe;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -122,8 +123,7 @@ class RecipeResource extends Resource
                 Tables\Columns\ImageColumn::make('photo_url')
 
                     ->label('Изображение'),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('user.login')
                     ->sortable()
                     ->badge()
                     ->label('Автор'),

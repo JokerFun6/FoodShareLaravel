@@ -31,8 +31,9 @@
             <div class="swiper-wrapper">
                 <!-- Slides -->
                 @foreach($popular as $recipe)
-                <div class="swiper-slide ">
+                <div class="swiper-slide" data-swiper-autoplay="3000">
                     <livewire:recipe-card :recipe="$recipe"/>
+                    <div class="swiper-lazy-preloader"></div>
                 </div>
                 @endforeach
                 ...
@@ -41,8 +42,8 @@
 
 
             <!-- If we need navigation buttons -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+{{--            <div class="swiper-button-prev"></div>--}}
+{{--            <div class="swiper-button-next"></div>--}}
 
             <!-- If we need scrollbar -->
 
@@ -53,7 +54,7 @@
             <div class="swiper-wrapper px-3">
                 <!-- Slides -->
                 @foreach($latest as $recipe)
-                    <div class="swiper-slide">
+                    <div class="swiper-slide" data-swiper-autoplay="3000">
                         <livewire:recipe-card :recipe="$recipe"/>
                     </div>
                 @endforeach
@@ -62,8 +63,8 @@
             </div>
 
             <!-- If we need navigation buttons -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+{{--            <div class="swiper-button-prev"></div>--}}
+{{--            <div class="swiper-button-next"></div>--}}
 
             <!-- If we need scrollbar -->
 

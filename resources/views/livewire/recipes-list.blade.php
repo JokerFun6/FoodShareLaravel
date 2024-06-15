@@ -38,12 +38,12 @@
 
             <div x-cloak x-show="open" class="fixed inset-0 z-50 flex">
                 <!-- Overlay -->
-                <div @click="open = false" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
+                <div @click="open = false" class="fixed inset-0 bg-base-100 bg-opacity-50 backdrop-blur-sm"></div>
 
                 <!-- Sidebar -->
-                <div class="relative w-80 overflow-y-auto bg-neutral shadow-lg transform transition-all duration-300 ease-in-out"
+                <div class="relative w-80 overflow-y-auto bg-neutral shadow-lg transform transition-all duration-300 ease-in-out scrollbar-thumb-rounded-[15px] scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-primary scrollbar-track-base-100 overflow-y-auto overflow-x-hidden"
                      :class="{ 'translate-x-0': open, '-translate-x-full': !open }">
-                    <div class="p-6">
+                    <div class="p-6 ">
                         <!-- Close Button -->
                         <button @click="open = false" class="absolute w-8 top-4 right-4 text-primary">
                             &times;
@@ -53,31 +53,55 @@
                             <label class="block mb-4">
                                 <span class="label">Выберите сложность:</span>
                                 <select wire:model.live="level"
-                                        class="select select-primary bg-base-100 select-sm w-full active:ring-0 active:border-none">
+                                        class="select border-base-100 bg-base-100 select-sm w-full active:ring-0 active:border-none">
                                     <option value="" selected>Выберите уровень</option>
                                     <option value="легкий">легкий</option>
                                     <option value="средний">средний</option>
                                     <option value="сложный">сложный</option>
                                 </select>
                             </label>
+
                             <div class="form-control mb-4">
                                 <label class="block mb-2">Укажите диапазон цен</label>
-                                <x-mary-input
-                                    type="number"
-                                    label="Минимальная цена"
-                                    wire:model.live.debounce.250ms="min_price"
-                                    class="input-sm"
-                                    suffix="руб."
-                                />
-                                <x-mary-input
-                                    type="number"
-                                    label="Максимальная цена"
-                                    wire:model.live.debounce.250ms="max_price"
-                                    class="input-sm"
-                                    suffix="руб."
-                                />
+                                <div class="flex items-center">
+                                    <x-mary-input
+                                        type="number"
+                                        min="0"
+                                        label="мин"
+                                        wire:model.live.debounce.250ms="min_price"
+                                        class="input-sm border border-black p-2"
+                                    />
+                                    <span class="mx-2">-</span>
+                                    <x-mary-input
+                                        type="number"
+                                        min="0"
+                                        label="макс"
+                                        wire:model.live.debounce.250ms="max_price"
+                                        class="input-sm border border-black p-2"
+                                    />
+                                </div>
                             </div>
                             <hr class="my-4"/>
+                            <div class="form-control mb-4">
+                                <label class="block mb-2">Укажите диапазон времени приготовления</label>
+                                <div class="flex items-center">
+                                    <x-mary-input
+                                        type="number"
+                                        min="0"
+                                        label="мин"
+                                        wire:model.live.debounce.250ms="min_time"
+                                        class="input-sm border border-black p-2"
+                                    />
+                                    <span class="mx-2">-</span>
+                                    <x-mary-input
+                                        type="number"
+                                        min="0"
+                                        label="макс"
+                                        wire:model.live.debounce.250ms="max_time"
+                                        class="input-sm border border-black p-2"
+                                    />
+                                </div>
+                            </div>
                             @auth
                                 <label class="block mb-4">
                                     <x-mary-checkbox class="checkbox-primary" label="Исключить нелюбимые продукты"
@@ -90,10 +114,10 @@
                             <hr class="my-4"/>
                             <x-mary-choices-offline
                                 wire:model.live="selectedTags"
-                                :options="$tags"
+                                :options="$this->tags"
                                 option-label="title"
                                 label="Выберите желаемые категории"
-                                class="input-info mb-2"
+                                class="border-none mb-2"
                                 icon="o-hashtag"
                                 searchable
                                 no-result-text="ничего не нашли"
@@ -101,10 +125,10 @@
                             <hr class="my-4"/>
                             <x-mary-choices-offline
                                 wire:model.live="selectedIngredients"
-                                :options="$ingredients"
+                                :options="$this->ingredients"
                                 option-label="title"
                                 label="Выберите необходимые ингредиенты"
-                                class="input-info mb-4"
+                                class="border-none mb-4"
                                 icon="o-beaker"
                                 searchable
                                 no-result-text="ничего не нашли"
@@ -124,7 +148,7 @@
         class="cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-between items-stretch mb-5"
     >
         @forelse($recipes as $recipe)
-            <livewire:recipe-card :key="$recipe->id" :recipe="$recipe"/>
+            <livewire:recipe-card :key="$recipe->id" :recipe="$recipe" />
         @empty
                <h1 class="text-xl text-center col-span-full">Не удалось ничего найти</h1>
         @endforelse

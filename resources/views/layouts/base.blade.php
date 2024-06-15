@@ -12,7 +12,7 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="min-h-screen overflow-y-hidden">
+<body class="min-h-screen scrollbar-thin scrollbar-thumb-primary scrollbar-track-base-100">
 
 <div class="flex flex-col min-h-screen scrollbar-thumb-rounded-[15px] scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-primary scrollbar-track-base-100 h-32 overflow-y-auto">
     <header class="w-full bg-primary">
@@ -91,12 +91,12 @@
     <div class="flex-1">
         @yield('content')
     </div>
-    <footer class="footer flex items-center justify-between p-2 border-t-2 w-full text-neutral-content mt-4">
-        <aside class="items-center grid-flow-col">
+    <footer class="footer max-w-[1440px] mx-auto flex items-center flex-wrap justify-center gap-2 sm:justify-between p-2 border-t-2 w-full text-neutral-content mt-4">
+        <aside class="flex items-center gap-2">
             <img src="{{ asset('assets/images/logo-small.png') }}" width="34px" alt="logo">
             <p>Copyright © 2024 - All right reserved</p>
         </aside>
-        <nav class="flex justify-end self-end">
+        <nav class="flex justify-end items-center">
             @guest
                 <div x-data="{ darkMode: $persist(false) }">
                     <label class="swap swap-rotate">
@@ -118,6 +118,87 @@
                         </svg>
                     </label>
                 </div>
+            @elseauth
+                <p>Спонсоры проекта: </p>
+
+                <a href="https://anm-hub.ru/"
+                   class="relative flex flex-col justify-center bg-[#525252] p-2 self-stretch rounded-md hover:shadow-primary shadow-md transition-all duration-300 hover:-translate-y-1"
+                   x-data="{ showPopup: false }"
+                   @mouseenter="showPopup = true"
+                   @mouseleave="showPopup = false">
+                    <img src="{{ asset('assets/images/anm-logo.png') }}" width="35px" alt="">
+
+                    <!-- Popup -->
+                    <div x-show="showPopup" x-cloak
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform translate-y-2"
+                         class="absolute bottom-full sm:right-full sm:-mt-6 -mr-10 sm:mr-0 w-64 p-2 bg-primary text-white text-sm rounded-md shadow-lg z-10 -translate-x-[40%] sm:-translate-x-0">
+                        ANM. Это отличная онлайн-платформа для сохранения и поиска ваших любимых аниме, манги и новелл.
+                    </div>
+                </a>
+                <a href="https://idol-club18.ru/"
+                   class="relative flex flex-col justify-center bg-black p-2 self-stretch rounded-md hover:shadow-primary shadow-md transition-all duration-300 hover:-translate-y-1"
+                   x-data="{ showPopup: false }"
+                   @mouseenter="showPopup = true"
+                   @mouseleave="showPopup = false">
+                    <img src="{{ asset('assets/images/idol-logo.png') }}" width="35px" alt="">
+
+                    <!-- Popup -->
+                    <div x-show="showPopup" x-cloak
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform translate-x-2"
+                         x-transition:enter-end="opacity-100 transform translate-x-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-x-0"
+                         x-transition:leave-end="opacity-0 transform translate-x-2"
+                         class="absolute bottom-full sm:right-full sm:-mt-6 sm:mr-0 w-64 p-2 bg-primary text-white text-sm rounded-md shadow-lg z-10 -translate-x-1/2 sm:-translate-x-0">
+                        IDOL CLUB. Это удобный онлайн-сервис для бронирования и заказов в заведении IDOL, с удобным и красивым интерфейсом.
+                    </div>
+                </a>
+                <a href="http://recreatemiracle.ankaina9.beget.tech/"
+                   class="relative flex flex-col justify-center bg-white p-2 self-stretch rounded-md hover:shadow-primary shadow-md transition-all duration-300 hover:-translate-y-1"
+                   x-data="{ showPopup: false }"
+                   @mouseenter="showPopup = true"
+                   @mouseleave="showPopup = false">
+                    <img src="{{ asset('assets/images/rm2-logo.png') }}" width="45px" alt="">
+
+                    <!-- Popup -->
+                    <div x-show="showPopup" x-cloak
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform translate-x-2"
+                         x-transition:enter-end="opacity-100 transform translate-x-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-x-0"
+                         x-transition:leave-end="opacity-0 transform translate-x-2"
+                         class="absolute top-0 right-0 w-64 p-2 bg-primary text-white text-sm rounded-md shadow-lg z-10 translate-y-[-119px]"
+                      >
+                        Recreate Miracle. Это классная онлайн-платформа для поиска, просмотра мастер-классов, а также покупок изделий у мастеров .
+                    </div>
+                </a>
+                <a href="https://mentisilium.ru/"
+                   class="relative flex flex-col justify-center bg-[#C4DEF9] p-2 self-stretch rounded-md hover:shadow-primary shadow-md transition-all duration-300 hover:-translate-y-1"
+                   x-data="{ showPopup: false }"
+                   @mouseenter="showPopup = true"
+                   @mouseleave="showPopup = false">
+                    <img src="{{ asset('assets/images/ment-logo.png') }}" width="35px" alt="">
+
+                    <!-- Popup -->
+                    <div x-show="showPopup" x-cloak
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform translate-x-2"
+                         x-transition:enter-end="opacity-100 transform translate-x-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-x-0"
+                         x-transition:leave-end="opacity-0 transform translate-x-2"
+                         class="absolute top-0 right-0 w-64 p-2 bg-primary text-white text-sm rounded-md shadow-lg z-10 translate-y-[-139px]"
+                    >
+                        Mentisilium. Это прекрасная учебная платформа для определения особенностей характера подростков, которая может быть включена в школьную программу.
+                    </div>
+                </a>
             @endguest
         </nav>
     </footer>

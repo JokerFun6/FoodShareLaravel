@@ -15,10 +15,13 @@ function initializeSwiper() {
         effect: 'coverflow',
         coverflowEffect: {
             rotate: 30,
-            slideShadows: false,
+            slideShadows: true,
+            depth: 70
         },
         direction: 'horizontal',
         loop: true,
+        // autoplay:true,
+        // pauseOnMouseEnter: true,
 
         // If we need pagination
         pagination: {

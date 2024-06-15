@@ -27,7 +27,8 @@ class Recipe extends Model
         'nationality_id',
         'is_publish',
         'user_id',
-        'is_visible'
+        'is_visible',
+        'views'
     ];
 
     protected $casts = [

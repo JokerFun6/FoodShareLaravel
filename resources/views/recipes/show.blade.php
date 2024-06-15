@@ -14,7 +14,7 @@
             <div class="">
                 <img
                     src="{{ asset('storage/'. $recipe->photo_url) }}"
-                    class="rounded-lg border-primary border-2 hover:scale-110 mb-3 transition ease-in-out delay-200 hover:shadow-xl hover:shadow-primary"
+                    class="rounded-lg border-primary border-2 mb-3 transition ease-in-out delay-200 hover:shadow-xl hover:shadow-primary"
                     alt=""
                 />
 {{--                rating--}}
