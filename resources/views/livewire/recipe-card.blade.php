@@ -1,4 +1,4 @@
-<div x-data="{ open: false, ishover : false }" @mouseenter="ishover=true" @mouseleave="ishover=false" class="relative h-[250px] overflow-hidden rounded-lg shadow-lg  ">
+<div x-data="{ open: false, ishover : false }" @mouseenter="ishover=true" @mouseleave="ishover=false" class="relative h-[190px] sm:h-[250px] overflow-hidden rounded-lg shadow-lg  ">
     <img loading="lazy" src="{{ asset('storage/'. $recipe->photo_url) }}" :class="{ 'blur-sm': ishover, 'scale-110': ishover }" alt="Recipe" class="absolute inset-0 object-cover w-full h-full opacity-70 transition ease-in-out delay-150 duration-300">
     <div href="{{ route('recipes.show', $recipe) }}" class="relative flex flex-col justify-between h-full p-6 bg-black bg-opacity-50">
         <div class="flex justify-between items-center">

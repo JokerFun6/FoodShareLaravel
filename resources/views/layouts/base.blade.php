@@ -12,7 +12,7 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="min-h-screen scrollbar-thin scrollbar-thumb-primary scrollbar-track-base-100">
+<body class="min-h-screen overflow-y-hidden">
 
 <div class="flex flex-col min-h-screen scrollbar-thumb-rounded-[15px] scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-primary scrollbar-track-base-100 h-32 overflow-y-auto">
     <header class="w-full bg-primary">
