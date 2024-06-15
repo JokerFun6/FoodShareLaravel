@@ -48,7 +48,7 @@
             <!-- If we need scrollbar -->
 
         </div>
-        <div class="swiper mt-3">
+        <div class="swiper mt-3 z-[0]">
             <h2 class="text-2xl text-neutral-content mb-3">Последние опубликованные рецепты</h2>
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper px-3">

@@ -23,7 +23,7 @@
                         <img :src="darkMode === 'dark' ? '{{ asset('assets/images/logo-dark.png') }}' : '{{ asset('assets/images/logo.png') }}'"
                              class="h-10 md:w-full"
                              x-init="$watch('darkMode', value => console.log(value))"
-
+                            loading="lazy"
                              alt="Логотип">
                     </a>
                     <div class="hidden min-[940px]:flex space-x-8 rtl:space-x-reverse">
@@ -155,7 +155,7 @@
                          x-transition:leave="transition ease-in duration-200"
                          x-transition:leave-start="opacity-100 transform translate-x-0"
                          x-transition:leave-end="opacity-0 transform translate-x-2"
-                         class="absolute bottom-full sm:right-full sm:-mt-6 sm:mr-0 w-64 p-2 bg-primary text-white text-sm rounded-md shadow-lg z-10 -translate-x-1/2 sm:-translate-x-0">
+                         class="absolute bottom-full sm:right-full sm:-mt-6 sm:mr-0 w-64 p-2 bg-primary text-white text-sm rounded-md shadow-lg z-55 -translate-x-1/2 sm:-translate-x-0">
                         IDOL CLUB. Это удобный онлайн-сервис для бронирования и заказов в заведении IDOL, с удобным и красивым интерфейсом.
                     </div>
                 </a>
