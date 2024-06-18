@@ -7,6 +7,7 @@ use App\Models\Recipe;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -41,6 +42,11 @@ class RecipesList extends Component
     public function resetProperties()
     {
         $this->reset();
+    }
+
+    #[On('update-query')]
+    public function changeQuery($query){
+        $this->query = $query;
     }
 
     public function changeDirection()

@@ -38,6 +38,7 @@ class SearchForm extends Component
         }else{
             $this->showdiv = false;
         }
+        $this->dispatch('update-query', query: $this->query)->to(RecipesList::class);
     }
     public function render()
     {
