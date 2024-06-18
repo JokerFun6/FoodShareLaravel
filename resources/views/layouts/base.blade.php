@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-small.png') }}" type="image/png">
     @yield('styles')
     @vite(['resources/css/app.css','resources/js/app.js'])
+    @livewireStyles
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
     <title>@yield('title')</title>
     <style>
@@ -14,12 +15,12 @@
 </head>
 <body class="min-h-screen overflow-y-hidden">
 
-<div class="flex flex-col min-h-screen scrollbar-thumb-rounded-[15px] scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-primary scrollbar-track-base-100 h-32 overflow-y-auto">
+<div class="flex flex-col min-h-screen scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-primary scrollbar-track-base-100 h-32 overflow-y-auto">
     <header class="w-full bg-primary">
         <nav class="mx-auto max-w-[1440px]" x-data="{ open: false, dropdownOpen: false }">
             <div class="max-w-screen mx-auto p-4 flex items-center justify-between">
                 <div class="flex items-center justify-center">
-                    <a x-data="{darkMode: $persist(false)}" @mode.window="darkMode = $event.detail" href="{{ route('recipes.topic') }}" class="flex items-center justify-center min-[940px]:mr-10 ">
+                    <a x-data="{darkMode: $persist(false)}" @mode.window="darkMode = $event.detail" href="{{ route('recipes.topic') }}" wire:navigate class="flex items-center justify-center min-[940px]:mr-10 ">
                         <img :src="darkMode === 'dark' ? '{{ asset('assets/images/logo-dark.png') }}' : '{{ asset('assets/images/logo.png') }}'"
                              class="h-10 md:w-full"
                              x-init="$watch('darkMode', value => console.log(value))"
@@ -27,9 +28,9 @@
                              alt="Логотип">
                     </a>
                     <div class="hidden min-[940px]:flex space-x-8 rtl:space-x-reverse">
-                        <a href="{{ route('recipes.create') }}" class="text-base-100 dark:text-dark-color-neutral hover:text-neutral dark:hover:text-dark-color-primary">Создать рецепт</a>
-                        <a href="{{ route('recipes.index') }}" class="text-base-100 dark:text-dark-color-neutral hover:text-neutral  dark:hover:text-dark-color-primary">Все рецепты</a>
-                        <a href="{{ route('recipes.random') }}" class="text-base-100 dark:text-dark-color-neutral hover:text-neutral  dark:hover:text-dark-color-primary">Случайный рецепт</a>
+                        <a href="{{ route('recipes.create') }}" wire:navigate class="text-base-100 dark:text-dark-color-neutral hover:text-neutral dark:hover:text-dark-color-primary">Создать рецепт</a>
+                        <a href="{{ route('recipes.index') }}" wire:navigate class="text-base-100 dark:text-dark-color-neutral hover:text-neutral  dark:hover:text-dark-color-primary">Все рецепты</a>
+                        <a href="{{ route('recipes.random') }}" wire:navigate class="text-base-100 dark:text-dark-color-neutral hover:text-neutral  dark:hover:text-dark-color-primary">Случайный рецепт</a>
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -60,8 +61,8 @@
                                         </svg>
                                     </label>
                                 </div>
-                                <a href="{{ route('users.index') }}" class="block px-4 py-2 hover:bg-gray-100">Профиль</a>
-                                <a href="{{ route('users.favorites') }}" class="block px-4 py-2 hover:bg-gray-100 ">
+                                <a href="{{ route('users.index') }}" wire:navigate class="block px-4 py-2 hover:bg-gray-100">Профиль</a>
+                                <a href="{{ route('users.favorites') }}" wire:navigate class="block px-4 py-2 hover:bg-gray-100 ">
                                     Избранное
                                     <div class="badge badge-primary badge-outline badge-lg">{{ auth()->user()->favorites->count() }}</div>
                                 </a>
@@ -79,9 +80,9 @@
                 </button>
             </div>
             <div x-cloak x-show="open" class="min-[940px]:hidden">
-                <a href="{{ route('recipes.create') }}" class="text-base-100 block px-4 py-2 hover:text-neutral ">Создать рецепт</a>
-                <a href="{{ route('recipes.index') }}" class="text-base-100 block px-4 py-2 hover:text-neutral ">Все рецепты</a>
-                <a href="{{ route('recipes.random') }}" class="text-base-100 block px-4 py-2 hover:text-neutral ">Случайный рецепт</a>
+                <a href="{{ route('recipes.create') }}" wire:navigate class="text-base-100 block px-4 py-2 hover:text-neutral ">Создать рецепт</a>
+                <a href="{{ route('recipes.index') }}" wire:navigate class="text-base-100 block px-4 py-2 hover:text-neutral ">Все рецепты</a>
+                <a href="{{ route('recipes.random') }}" wire:navigate class="text-base-100 block px-4 py-2 hover:text-neutral ">Случайный рецепт</a>
                 <div class="w-full px-4 mb-3">
                     <livewire:search-form />
                 </div>

@@ -100,7 +100,7 @@
                     </li>
                     <li>
                         <span class="font-black">Сложность:</span>
-                        <a href="{{ route('recipes.index', ['level' => $recipe->complexity]) }}" class="badge badge-success">{{ $recipe->complexity }}</a>
+                        <a href="{{ route('recipes.index', ['level' => $recipe->complexity]) }}" wire:navigate class="badge badge-success">{{ $recipe->complexity }}</a>
                     </li>
                     <li class="mb-5">
                         <span class="font-black">Примерная стоимость: </span>
@@ -118,8 +118,8 @@
                     </li>
                     <li class="mb-5 flex items-center">
                         <span class="font-black mr-2">Автор: </span>
-                        <a href="{{ route('users.index', $recipe->user->id) }}" class="link link-hover">{{ $recipe->user->login }}</a>
-                        <a href="{{ route('users.index', $recipe->user->id) }}">
+                        <a href="{{ route('users.index', $recipe->user->id) }}" wire:navigate class="link link-hover">{{ $recipe->user->login }}</a>
+                        <a href="{{ route('users.index', $recipe->user->id) }}" wire:navigate>
                             <div class="avatar ml-2">
                                 <div
                                     class="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
@@ -155,7 +155,7 @@
                     </li>
                     <li class="flex flex-wrap gap-2">
                         @foreach($recipe->tags as $tag)
-                            <a href="{{ route('recipes.index', ['tags[0]' => $tag->id]) }}">
+                            <a href="{{ route('recipes.index', ['tags[0]' => $tag->id]) }}" wire:navigate>
                                 <x-mary-badge value="#{{ $tag->title  }}" class="badge-accent italic badge-lg" />
                             </a>
                         @endforeach
