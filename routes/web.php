@@ -6,6 +6,7 @@ use App\Http\Controllers\user\UserController;
 use App\Livewire\Welcome;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,9 +66,16 @@ Route::get('auth/yandex', function (){
     return Socialite::driver('yandex')->redirect();
 } )->name('auth.yandex');
 
-Route::get('auth/yandex/callback', function (){
-    $yandexUser = Socialite::driver('yandex')->user();
-//    dd($yandexUser->user['login']);
+Route::get('auth/yandex/callback', function () {
+    try {
+        $yandexUser = Socialite::driver('yandex')->user();
+    } catch (\Exception $e) {
+        // Log the error
+        Log::error('Error fetching Yandex user: '.$e->getMessage());
+
+        // Redirect to a custom error page or back with an error message
+        return redirect()->route('login')->with('error', 'Unable to login using Yandex. Please try again.');
+    }
 
     // Check if the user already exists
     $user = User::where('email', $yandexUser->email)->first();
@@ -82,8 +90,6 @@ Route::get('auth/yandex/callback', function (){
             'avatar_url' => User::generateAvatar($yandexUser->user['login']),
             'email' => $yandexUser->email,
             'password' => bcrypt(Str::random(10)), // Random password as it won't be used
-//            'yandex_id' => $yandexUser->getId(),
-            // Add other fields as necessary
         ]);
     }
 
@@ -91,9 +97,8 @@ Route::get('auth/yandex/callback', function (){
     Auth::login($user, true); // True for remember me
 
     // Redirect to the intended page
-    return redirect()->route('users.index'); //
-
-} )->name('auth.yandex.callback');
+    return redirect()->route('users.index');
+})->name('auth.yandex.callback');
 
 
 
