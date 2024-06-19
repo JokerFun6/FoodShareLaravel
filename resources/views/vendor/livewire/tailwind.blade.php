@@ -42,13 +42,13 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
             <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                 <div>
                     <p class="text-sm leading-5">
-                        <span>{!! __('Showing') !!}</span>
+                        <span>{!! __('Показано с') !!}</span>
                         <span class="font-medium">{{ $paginator->firstItem() }}</span>
-                        <span>{!! __('to') !!}</span>
+                        <span>{!! __('по') !!}</span>
                         <span class="font-medium">{{ $paginator->lastItem() }}</span>
-                        <span>{!! __('of') !!}</span>
+                        <span>{!! __('из') !!}</span>
                         <span class="font-medium">{{ $paginator->total() }}</span>
-                        <span>{!! __('results') !!}</span>
+                        <span>{!! __('рецептов') !!}</span>
                     </p>
                 </div>
 
