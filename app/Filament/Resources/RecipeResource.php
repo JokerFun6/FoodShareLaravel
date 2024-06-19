@@ -128,6 +128,7 @@ class RecipeResource extends Resource
                     ->badge()
                     ->label('Автор'),
                 Tables\Columns\ToggleColumn::make('is_publish')
+                    ->sortable()
                     ->label('Опубликовать'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
