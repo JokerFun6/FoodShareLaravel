@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="min-h-screen" data-theme="light">
+<html lang="en" class="min-h-screen scrollbar-thin scrollbar-thumb-primary scrollbar-track-base-100" data-theme="light" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -118,6 +118,28 @@
                             <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
                         </svg>
                     </label>
+                </div>
+                <div x-data="{ showModal: false }">
+                    <!-- Иконка, по нажатию на которую показывается модальное окно -->
+                    <div class="cursor-pointer" @click="showModal = true">
+                        <x-mary-icon name="o-qr-code" class="w-9 h-9" />
+                    </div>
+
+                    <!-- Модальное окно -->
+                    <div x-show="showModal"
+                         x-cloak
+                         class="fixed backdrop-blur-sm inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50 transition-opacity duration-300"
+                         @click="showModal = false"
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100"
+                         x-transition:leave-end="opacity-0">
+                        <div class="bg-white p-4 rounded-lg max-w-lg mx-auto" @click.stop>
+                            <img src="{{ asset('assets/images/qrcode.png') }}" alt="QR Code Image" class="max-w-full h-auto">
+                        </div>
+                    </div>
                 </div>
             @elseauth
                 <p>Спонсоры проекта: </p>
